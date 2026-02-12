@@ -1,0 +1,18 @@
+download iso
+https://digistorage.es/links/3e8c3496-d497-4510-abf4-05a0cc5cefcc
+crear la vm con el iso
+
+poner dos redes bridge y otra LAN
+
+darle 4gb de ram
+
+systema operacional freeBSD
+
+en system check en el box de I/O APIC
+
+instalamos (a todo le damos ok y chequeamos box)
+
+una vez instalado apagamos la maquina, sacamos el iso y volvemos a ejecutar
+
+continuar viendo
+https://www.youtube.com/watch?v=G-ZETVfaFb4&list=PLHjuPxrwcdsY7Ur7mCea3dIu8ZNMOHNNZ&index=3
