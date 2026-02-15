@@ -80,56 +80,15 @@ O projeto tem como objetivo criar um ambiente controlado para estudo e prática 
 - Integração com Wazuh para envio de alertas
 - Criação de regras personalizadas para detecção de tráfego malicioso
 
-### 4. Configuração do Kali Linux (Máquina de Ataque)
-- Preparação do ambiente de ataque
-- Conexão à rede do laboratório
-- Ferramentas instaladas: nmap, metasploit, crackmapexec, responder, bloodhound, mimikatz, etc.
+## 📚 O que este repositório documenta
 
-## ⚔️ Cenários de Ataque e Configuração
+Este **não é um projeto para download**, mas sim uma **documentação detalhada dos procedimentos** que estou realizando localmente. Cada etapa é registrada com:
 
-Para cada ataque, este repositório documenta passo a passo:
-
-### 1. **Reconhecimento e Enumeração**
-   - **Ferramenta**: Nmap, BloodHound
-   - **Configuração necessária**: Descoberta de hosts, serviços e coleta de informações do AD
-   - **Comandos**: `nmap -sV 192.168.1.0/24`, `bloodhound-python -u user -p pass -d lab.local -dc dc.lab.local -c All`
-
-### 2. **Ataques de Autenticação**
-   - **Kerberoasting**
-   - **AS-REP Roasting**
-   - **Pass-the-Hash**
-   - **SMB Relay**
-   - **LLMNR/NBT-NS Poisoning** (Responder)
-   -  **Delegacoes**
-   -  **Certificados**
-
-### 3. **Ataques de Senha**
-   - **Password Spraying**
-   - **Brute Force**
-   - **Credential Dumping** (Mimikatz, secretsdump)
-
-### 4. **Movimentação Lateral e Escalação de Privilégios**
-   - **PsExec, WMI, WinRM**
-   - **Token Impersonation**
-   - **Unquoted Service Paths**
-   - **Scheduled Tasks**
-
-### 5. **Persistência**
-   - **Criação de usuários locais/domínio**
-   - **Golden Ticket**
-   - **Silver Ticket**
-   - **Diamond Ticket**
-
-
-## 📊 Detecção e Resposta (Blue Team)
-
-Para cada ataque documentado, são fornecidos:
-- **Regras do Wazuh** para detecção
-- **Consultas personalizadas** no dashboard do Wazuh
-- **Procedimentos de resposta a incidentes**
-
-
-
+- ✅ **Configuração passo a passo** de cada componente
+- ✅ **Comandos utilizados** (tanto no Windows quanto no Linux)
+- ✅ **Configurações específicas** para que os ataques funcionem
+- ✅ **Regras de detecção** criadas no Wazuh
+- ✅ **Análise dos resultados** e screenshots
 
 
 ## ⚠️ Aviso Legal
