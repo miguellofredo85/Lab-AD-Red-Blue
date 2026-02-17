@@ -1,9 +1,9 @@
-OPCIONAL: Baixamos e instalamos o Notepad++ -> https://notepad-plus-plus.org/downloads/
-Baixar e instalar o npcap -> https://npcap.com/#download
-Baixar e instalar o Suricata -> https://suricata.io/download/
-Baixar regras do Suricata -> https://rules.emergingthreats.net/open/
-Editar arquivo de configuração do Suricata.
-Editar: C:\Program Files\Suricata\Suricata.yaml
+- OPCIONAL: Baixamos e instalamos o Notepad++ -> https://notepad-plus-plus.org/downloads/
+- Baixar e instalar o npcap -> https://npcap.com/#download
+- Baixar e instalar o Suricata -> https://suricata.io/download/
+- Baixar regras do Suricata -> https://rules.emergingthreats.net/open/
+- Editar arquivo de configuração do Suricata.
+- Editar: C:\Program Files\Suricata\Suricata.yaml
   
 address-groups: HOME_NET: "IP_LOCAL"
 
