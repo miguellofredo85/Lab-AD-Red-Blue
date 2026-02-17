@@ -1,4 +1,4 @@
-1. Edita el archivo de configuración del agente Wazuh
+1. Edita arquivo de configuracaon do agente Wazuh
 C:\Program Files (x86)\ossec-agent\ossec.conf
 
 <syscheck>
@@ -7,12 +7,12 @@ C:\Program Files (x86)\ossec-agent\ossec.conf
 ...
 </syscheck>
 
-2. Reinicia Wazuh-Agent - CMD con permisos de administrador
+2. Reinicia Wazuh-Agent - CMD com permisos de administrador
 net stop Wazuh
 net start Wazuh
 
 
-Registro en VIRUSTOTAL -> https://www.virustotal.com/
+Registro no VIRUSTOTAL -> https://www.virustotal.com/
 
 1. Configurar WAZUH-MANAGER
 
@@ -29,16 +29,12 @@ EDITAR: sudo nano /var/ossec/etc/ossec.conf
 
   systemctl restart wazuh-manager
 
-3. Crear archivo eicar.txt en directorio monitorizado.
+3. Criar arquivo eicar.txt no directorio monitorizado.
 
 X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
 <img width="1537" height="349" alt="eicar-test-virus" src="https://github.com/user-attachments/assets/2cbebe0f-849c-43d0-8ebf-dcba7d3f38f7" />
 
 
 4. Visualizar alerta en Wazuh Dashboard
+<img width="1897" height="593" alt="wazuh-virutotal" src="https://github.com/user-attachments/assets/ce5c1287-cf22-4730-9cc0-82a5dd24aeb5" />
 
-5. Crear archivo malwaretest.txt  
- 
-  malwaretest
-Mostrando WZ.07 - FIM & VIRUSTOTA<img width="1897" height="593" alt="wazuh-virutotal" src="https://github.com/user-attachments/assets/ce5c1287-cf22-4730-9cc0-82a5dd24aeb5" />
-L.txt.
