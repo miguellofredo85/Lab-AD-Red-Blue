@@ -1,84 +1,58 @@
-
-
-
-
-
-***************************************************************************************************************
-********************************************** SURICATA *******************************************************
-***************************************************************************************************************
-
-0. OPCIONAL: Descargamos e instalamos Notepad++ -> https://notepad-plus-plus.org/downloads/
-1. Descargar e instalar npcap -> https://npcap.com/#download
-2. Descargar e instalar Suricata -> https://suricata.io/download/
-3. Descargar reglas Suricata -> https://rules.emergingthreats.net/open/
-4. Editar archivo de configuración de Suricata.
-
+OPCIONAL: Baixamos e instalamos o Notepad++ -> https://notepad-plus-plus.org/downloads/
+Baixar e instalar o npcap -> https://npcap.com/#download
+Baixar e instalar o Suricata -> https://suricata.io/download/
+Baixar regras do Suricata -> https://rules.emergingthreats.net/open/
+Editar arquivo de configuração do Suricata.
 Editar: C:\Program Files\Suricata\Suricata.yaml
   
-address-groups:
-    HOME_NET: "IP_LOCAL"
+address-groups: HOME_NET: "IP_LOCAL"
 
 rule-files:
- - emerging-all.rules (comentar el resto de reglas)
- 
- y copiar y pegar el archivo descargado en suricata/rules
 
-5. Iniciar Suricata.
+emerging-all.rules (comentar o restante das regras)
+e copiar e colar o arquivo baixado em suricata/rules
 
-Obtener UUID (identificador único de hardware).
-wmic nicconfig get ipaddress,SettingID
+Iniciar o Suricata.
+Obter o UUID (identificador único de hardware). wmic nicconfig get ipaddress,SettingID
 
-IMPORTANTE: En las nuevas versiones de Windows WMIC está deprecado. Debéis emplear este comando:
+IMPORTANTE: Nas novas versões do Windows, o WMIC está obsoleto. Vocês devem usar este comando:
 
 Get-CimInstance Win32_NetworkAdapterConfiguration |
 Where-Object { $_.IPAddress } |
 Select-Object @{n="IPAddress";e={$_.IPAddress -join ", "}}, SettingID
 
-Abrir CMD como administrador y ejecutar.
-"C:\Program Files\Suricata\suricata.exe" -c "C:\Program Files\Suricata\suricata.yaml" -i \Device\NPF_{2980F88B-DA35-459F-BD2B-01F61E384406}
+Abrir o CMD como administrador e executar. "C:\Program Files\Suricata\suricata.exe" -c "C:\Program Files\Suricata\suricata.yaml" -i \Device\NPF_{2980F88B-DA35-459F-BD2B-01F61E384406}
 
-Realizamos ping desde otro equipo y comprobamos eve.json.
+Realizamos ping de outro computador e verificamos o eve.json.
 
-6. Configurar Wazuh-Agent.
-
+Configurar o Wazuh-Agent.
 Editar: C:\Program Files (x86)\ossec-agent\ossec.conf
 
-<ossec_config>
-...
-  <localfile>
-    <log_format>json</log_format>
-    <location>C:\Program Files\Suricata\log\eve.json</location>
-  </localfile>
-...
-</ossec_config>
+<ossec_config> ... <log_format>json</log_format> C:\Program Files\Suricata\log\eve.json ... </ossec_config>
 
-Reiniciar servicio Wazuh-Agent -> CMD
-net stop Wazuh
-net start Wazuh
+Reiniciar o serviço Wazuh-Agent -> CMD net stop Wazuh e net start Wazuh
 
-7. Comprobar Wazuh Dashboard.
+Verificar o Wazuh Dashboard.
 
-***************************************************************************************************************
-*************************************** CREAR TAREA PROGRAMADA ************************************************
-***************************************************************************************************************
 
-1. Abre el Programador de tareas (Task Scheduler) desde el menú de inicio.
+*************************************** CRIAR TAREFA AGENDADA ************************************************
 
-2. Haz clic en Crear tarea básica.
+Abra o Agendador de tarefas (Task Scheduler) no menu iniciar.
 
-3. Ponle un nombre (por ejemplo, "Suricata IDS").
+Clique em Criar tarefa básica.
 
-4. Elige cuando se inicie el sistema como desencadenador.
+Dê um nome (por exemplo, "Suricata IDS").
 
-5. En Acción, selecciona Iniciar un programa.
+Escolha quando o sistema iniciar como gatilho.
 
-    - En Programa o script, pon la ruta al ejecutable de Suricata:
+Em Ação, selecione Iniciar um programa.
 
-        "C:\Program Files\Suricata\suricata.exe"
+Em Programa/script, coloque o caminho para o executável do Suricata:
 
-    - En Agregar argumentos, pon:
+"C:\Program Files\Suricata\suricata.exe"
 
-        -c "C:\Program Files\Suricata\suricata.yaml" -i \Device\NPF_{*************UUID*************}
+Em Adicionar argumentos, coloque:
 
-6. Ejecuta la tarea.
-Mostrando WZ.06 SURICATA WINDOWS.txt.
+-c "C:\Program Files\Suricata\suricata.yaml" -i \Device\NPF_{UUID}
+
+Execute a tarefa. Mostrando WZ.06 SURICATA WINDOWS.txt.
