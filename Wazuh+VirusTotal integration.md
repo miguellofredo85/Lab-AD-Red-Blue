@@ -31,11 +31,14 @@ EDITAR: sudo nano /var/ossec/etc/ossec.conf
 
 3. Crear archivo eicar.txt en directorio monitorizado.
 
-  X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+<img width="1537" height="349" alt="eicar-test-virus" src="https://github.com/user-attachments/assets/2cbebe0f-849c-43d0-8ebf-dcba7d3f38f7" />
+
 
 4. Visualizar alerta en Wazuh Dashboard
 
 5. Crear archivo malwaretest.txt  
  
   malwaretest
-Mostrando WZ.07 - FIM & VIRUSTOTAL.txt.
+Mostrando WZ.07 - FIM & VIRUSTOTA<img width="1897" height="593" alt="wazuh-virutotal" src="https://github.com/user-attachments/assets/ce5c1287-cf22-4730-9cc0-82a5dd24aeb5" />
+L.txt.
