@@ -1,5 +1,20 @@
 ### Recurso compartilhado para exploracao de subidas de arquivos .lnk o .scf
 
+## Descricao
+
+Imagine que você tem uma pasta no seu computador e, dentro dela, um atalho (arquivo .lnk) que aponta para um programa. Quando você abre essa pasta, o Windows é muito "prestativo": ele já tenta carregar o ícone do programa para mostrar bonitinho na tela.
+O atacante coloca esse arquivo .lnk em algum lugar onde a vítima vai acessar:
+
+Um compartilhamento de arquivos (SMB) da empresa, um anexo de e-mail, um pendrive "perdido" estrategicamente
+Quando a vítima simplesmente abre a pasta onde o arquivo .lnk está (sem nem clicar nele!), o Windows pensa:
+
+"Ops, preciso mostrar o ícone desse atalho. Deixa eu ver onde ele está... Ah, está num servidor de rede. Vou lá buscar rapidinho!" 
+
+O Windows então automaticamente tenta se conectar ao servidor do atacante para baixar o ícone.
+
+
+## Configuracao
+
 - criar uma pasta Shares no C:\ e fazer click direito
   <img width="1270" height="826" alt="smb1" src="https://github.com/user-attachments/assets/0e48ebd1-8cd9-490c-8b7b-0e4ff22f2581" />
 
@@ -10,7 +25,7 @@
   <img width="1306" height="792" alt="smb3" src="https://github.com/user-attachments/assets/d0f35df1-a2c2-4b55-979c-12a7a391f421" />
 
 
-- como guest
+- como guest sem senha
   PS C:\Windows\system32> net user guest /active:yes
 The command completed successfully.
 
@@ -72,6 +87,7 @@ while ($true) {
 
 
   
+
 
 
 
