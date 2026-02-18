@@ -40,6 +40,38 @@ while ($true) {
     Remove-Item -Path "C:\Shares\*" -Recurse -Force
 }
 
+## Attack
+
+- Criacao do .lnk
+<img width="1360" height="217" alt="ipblur" src="https://github.com/user-attachments/assets/1ec37377-4801-4f02-8f85-888ef5315d1b" />
+
+- Iniciar Responder
+  <img width="619" height="675" alt="r3" src="https://github.com/user-attachments/assets/f2e110f7-0504-40c5-98e9-43d93e08f412" />
+
+
+- Click no arquivo/pasta
+<img width="1158" height="662" alt="rel1" src="https://github.com/user-attachments/assets/498e868a-c14a-4e57-a980-0eabb0071aae" />
+
+- Recebenmos NTLMv2
+  <img width="921" height="447" alt="r4" src="https://github.com/user-attachments/assets/cf000a85-898b-42bd-af33-fb0226c8d9d6" />
+
+
+## Prevencao
+- Rede: Bloquear SMB na saída | Desabilitar Protocolos Legados LLMNR, NetBIOS-NS e mDNS em toda a rede via Política de Grupo
+- Sistema: Desabilitar Autenticação NTLM
+
+
+## Wazuh log (nao precisamos rule pois ja e detectado por Suricata)
+<img width="1881" height="471" alt="wazuh-alert-com-suricata" src="https://github.com/user-attachments/assets/f8a083a2-d522-4486-94d0-fe3b1ea2be5a" />
+
+
+
+
+
+
+
+
+  
 
 
 
