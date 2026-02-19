@@ -81,18 +81,53 @@ Como temos salvo o ticket no Administrator.ccache nao precisamos colocal a pass 
 
 
 
+# Wazuh log e regras
+
+Adicionar no ossec.conf do dc
+```
+<localfile>
+  <location>C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Log\ERRORLOG</location>
+  <log_format>syslog</log_format>
+</localfile>
+```
+
+Regra 
+```
+<group name="silver_ticket,recon,kerberos,">
+
+  <!-- Regra 14: Conexões para porta SQL anômalas -->
+  <rule id="140014" level="7">
+    <if_group>suricata</if_group>
+    <field name="dest_port">^60111$</field>
+    <field name="src_ip" negate="yes">^192\.168\.0\.40</field> <!-- IPs autorizados -->
+    <description>⚠️ Conexão SQL de origem não autorizada: $(src_ip) para porta $(dest_port)</description>
+    <mitre>
+      <id>T1558.003</id>
+    </mitre>
+  </rule>
+<rule id="140007" level="12">
+    <if_sid>60103</if_sid> <!-- Grupo Security Events -->
+    <field name="win.system.eventID">^4769$</field> <!-- Kerberos Service Ticket Request -->
+    <field name="win.eventdata.ServiceName" type="pcre2">^(?i)(cifs|host|http|mssqlsvc|ldap)/HYDRA-DC\.MARVEL\.local</field>
+    <field name="win.eventdata.TicketOptions">^0x40800000$|^0x40810000$</field> <!-- S4U2Proxy flags -->
+    <field name="win.eventdata.TargetUserName" negate="yes">.*\$$</field> <!-- Ignorar contas de computador -->
+    <description>⚠️ Possível Silver Ticket: Requisição de ticket para serviço crítico de $(win.eventdata.IpAddress) - Usuário: $(win.eventdata.TargetUserName)</description>
+    <mitre>
+      <id>T1558.003</id>
+    </mitre>
+  </rule>
+</group>
+```
+
+<img width="1897" height="390" alt="wazuhST" src="https://github.com/user-attachments/assets/12dce797-9d7a-4d82-8ca8-8a48cf30372b" />
 
 
-
-
-
-
-
-
-
-
-
-
+# 🛡️ Prevenções contra Silver Ticket Attack (Resumo)
+- Use contas gerenciadas (gMSA) que trocam senhas automaticamente
+- Limite contas com SPNs - só o necessário
+- Mude senhas regularmente (invalida Silver Tickets existentes)
+- Desabilitar RC4 (forçar AES)
+- Contas de serviço não precisam ser Domain Admin
 
 
 
