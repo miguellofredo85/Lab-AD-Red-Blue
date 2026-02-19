@@ -18,6 +18,7 @@ O serviço alvo aceita o ticket porque consegue descriptografá-lo com seu próp
 
 Identificar um serviço com SPN registrado (qualquer serviço com conta associada):
 ```setspn -Q */*```
+Configurar segundo [MSSQL Server Configuracao](https://github.com/miguellofredo85/Lab-AD-Red-Blue/blob/main/AD-Config/MSSQL.md)
 
 ### Contas de servicio alvo
 <img width="1166" height="565" alt="lm" src="https://github.com/user-attachments/assets/afb640cf-b9fb-4c2b-a95b-4a6683cb68c6" />
