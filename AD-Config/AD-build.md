@@ -44,7 +44,7 @@ Mesmo para certificates (just check box for it then all next) continuar
 - SYSTEM -> Network & Internet -> status -> Change Adapter options -> Ethernet properties -> TCP/IPv4 properties -> Check no Use the following DNS Server adresses -> Preferred DNS settings colocar ip 8.8.8.8
 
 
-### Two join domain machines
+### Unir maquinas ao ominio
 
 - Agora criamos duas/treis maquinas windows 10
 
@@ -56,7 +56,7 @@ Mesmo para certificates (just check box for it then all next) continuar
 <img width="1025" height="698" alt="win-install-uncheck" src="https://github.com/user-attachments/assets/de5ca74f-167f-47be-b2f3-e67c0c92e722" />
 
 
-- Escolher como exemplo THEPUNISHER usuario frankcastle e SPIDERMAN usuario peterparker. Depois do login mudar o nome da maquina (setting → about → rename this pc)
+- Escolher como exemplo THEPUNISHER usuario frankcastle e SPIDERMAN usuario peterparker e alguma tipo SQLServer para logo brincar com o servicio. Depois do login mudar o nome da maquina (setting → about → rename this pc)
 - SYSTEM -> Network & Internet -> status -> Change Adapter options -> Ethernet properties -> TCP/IPv4 properties -> Check no Use the following DNS Server adresses -> Preferred DNS settings colocar ip do DC 
 <img width="868" height="622" alt="Netw-DC-2" src="https://github.com/user-attachments/assets/9bd3ca3d-4cdb-4c2f-9699-ca3343f55bde" />
 
@@ -69,4 +69,6 @@ Mesmo para certificates (just check box for it then all next) continuar
 - No server manager dashboard -> Tools -> AD Users and Computers
 
   - Exemplo Users
+ 
+  # Em Construcao.....
  click direito na pasta users -> new -> user -> comeca a inserir dados (em senha inserir a mesma do usuario original por exemplo a mesma do usuario fcastle e so check no PAssword never expires)
