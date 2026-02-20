@@ -5,9 +5,9 @@
   <img width="955" height="857" alt="" src="https://github.com/user-attachments/assets/0ce8f95f-b4b0-4e97-b685-1b81cbe98080" />
 
 ## Procurar delegacoes
-windows
+- windows
 <img width="775" height="622" alt="powerview-check-cd" src="https://github.com/user-attachments/assets/23b46a4d-7f51-4108-bd14-685866c9185e" />
-linux
+- linux
 <img width="1109" height="180" alt="finddelegation-linux" src="https://github.com/user-attachments/assets/4f182e5e-5c67-4b36-b011-4ef0afcfdd47" />
 
 ## Com Protocol Transition PoC
