@@ -7,6 +7,7 @@
 ## Procurar delegacoes
 - windows
 <img width="775" height="622" alt="powerview-check-cd" src="https://github.com/user-attachments/assets/23b46a4d-7f51-4108-bd14-685866c9185e" />
+
 - linux
 <img width="1109" height="180" alt="finddelegation-linux" src="https://github.com/user-attachments/assets/4f182e5e-5c67-4b36-b011-4ef0afcfdd47" />
 
