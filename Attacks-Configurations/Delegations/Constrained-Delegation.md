@@ -6,10 +6,10 @@
 
 ## Procurar delegacoes
 - windows
-<img width="775" height="622" alt="powerview-check-cd" src="https://github.com/user-attachments/assets/23b46a4d-7f51-4108-bd14-685866c9185e" />
+<img width="735" height="630" alt="win" src="https://github.com/user-attachments/assets/f1ec9d02-d4b1-42a0-bdce-ff9dc81822b5" />
 
 - linux
-<img width="1109" height="180" alt="finddelegation-linux" src="https://github.com/user-attachments/assets/4f182e5e-5c67-4b36-b011-4ef0afcfdd47" />
+<img width="1035" height="243" alt="li" src="https://github.com/user-attachments/assets/29774bd0-ac10-42fb-8ddf-30f5d792cb88" />
 
 ## Com Protocol Transition PoC
 <img width="1918" height="620" alt="poc-impacket" src="https://github.com/user-attachments/assets/58001aa8-2ead-4620-8697-b6df5cc215be" />
