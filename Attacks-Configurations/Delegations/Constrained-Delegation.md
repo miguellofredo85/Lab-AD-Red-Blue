@@ -40,7 +40,7 @@ Você precisa de uma estratégia diferente. A mais comum é usar um ataque de De
 <img width="1140" height="403" alt="klistspiderman" src="https://github.com/user-attachments/assets/0548ebd5-f5dd-4d99-bde5-50c1884c36e1" />
 
 ```Enter-PSSession SPIDERMAN```   
-como meu usuario nao tem permisos rpivilegiados so posso listar recursos que tem acceso
+como meu usuario nao tem permisos privilegiados so posso listar recursos que tem acceso
 <img width="1008" height="312" alt="dir" src="https://github.com/user-attachments/assets/cda21e4d-bf6a-428d-81fc-22429e7bee37" />
 
 
