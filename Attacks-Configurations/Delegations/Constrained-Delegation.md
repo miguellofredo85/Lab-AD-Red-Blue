@@ -48,3 +48,51 @@ como meu usuario nao tem permisos privilegiados so posso listar recursos que tem
 ## Prevencao
 - Configure a propriedade A conta é confidencial e não pode ser delegada para todos os usuários privilegiados.
 - Adicione usuários privilegiados ao grupo Usuários protegidos: essa associação aplica automaticamente a proteção mencionada acima (no entanto, não é recomendável usar Usuários protegidos sem primeiro entender suas possíveis implicações).
+
+
+## Wazuh logs e regrras
+```
+<group name="windows,sysmon,delegation_attack,">
+
+  <!-- Rule 1: Detecção no DC (HYDRA-DC) - Evento 4769 com opções suspeitas de delegação -->
+  <rule id="100200" level="12">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4769$</field>
+    <!-- CORRIGIDO: ServiceName deve conter SPIDERMAN (sem $) pois é o serviço alvo -->
+    <field name="win.eventdata.ServiceName" type="pcre2">(?i)(cifs/SPIDERMAN|SPIDERMAN)</field>
+    <field name="win.eventdata.TicketOptions" type="pcre2">^0x40800000$|^0x40810000$</field>
+    <field name="win.eventdata.TicketEncryptionType">^0x17$</field>
+    <!-- OPCIONAL: Filtrar pelo usuário que está sendo impersonado (pparker) -->
+    <field name="win.eventdata.TransmittedServices" type="pcre2">(?i).*pparker.*</field>
+    <description>Windows Security: Possível abuso de Constrained Delegation - Ticket para SPIDERMAN solicitado com opções S4U2Proxy</description>
+    <mitre>
+      <id>T1558.003</id>
+    </mitre>
+  </rule>
+
+  <!-- Rule 2: Detecção no SPIDERMAN - Criação de serviço remoto (psexec) -->
+  <rule id="100201" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i).*services\.exe</field>
+    <field name="win.eventdata.image" type="pcre2">(?i).*\\temp\\[a-z0-9]{8}\.exe</field>
+    <description>Sysmon: Possível lateral movement via psexec apos delegacao</description>
+  </rule>
+
+  <!-- Rule 3: Detecção no SPIDERMAN - Upload via ADMIN$ -->
+  <rule id="100202" level="10">
+    <if_group>sysmon_event11</if_group>
+    <field name="win.eventdata.image">.*\\svchost\.exe</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i).*ADMIN\$\\temp\\[a-z0-9]{8}\.exe</field>
+    <description>Sysmon: Upload de binario via ADMIN$ (padrao psexec)</description>
+  </rule>
+
+  <!-- Rule 4: Correlação - Ticket no DC + Acesso no SPIDERMAN = Ataque confirmado -->
+  <rule id="100203" level="15" frequency="2" timeframe="300">
+    <if_matched_sid>100200,100201</if_matched_sid>
+    <description>CRITICO: Ataque de Constrained Delegation confirmado - Ticket forjado + lateral movement</description>
+  </rule>
+
+</group>
+```
+<img width="1918" height="564" alt="wazuhcd" src="https://github.com/user-attachments/assets/fabc14a4-f73a-4157-9dd5-0eda86eae379" />
+
