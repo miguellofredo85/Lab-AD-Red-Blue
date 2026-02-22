@@ -48,8 +48,12 @@ RETURN p
 
 - Agora comecamos o RBCD configurando a FAKECOMPUTER para delegar a SPIDERMAN
 <img width="1065" height="663" alt="newblood" src="https://github.com/user-attachments/assets/fc015ecb-d345-4139-a2e4-184fd7cff1ca" />
-- Adicionamos permisos
+- Configuramos amaquina alvo
 <img width="1296" height="202" alt="permisos" src="https://github.com/user-attachments/assets/194b1243-073c-42c6-9c24-d440c2eb4538" />
+- Pedimos o Silver ticket
+  <img width="1313" height="206" alt="ST" src="https://github.com/user-attachments/assets/af46f7c5-9f28-4a74-9991-ca79453d98b0" />
+- Salvamos o ticker e entremos na maquina SPIDERMAN como system
+  <img width="1060" height="659" alt="enter" src="https://github.com/user-attachments/assets/0d7c3304-d8c3-4a7a-919a-28dd668ae8c2" />
 
 
 ## Exploração desde Windows
