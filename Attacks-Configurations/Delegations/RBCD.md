@@ -46,6 +46,8 @@ RETURN p
 - Adicionamos uma maquina
   <img width="1913" height="252" alt="addmachine" src="https://github.com/user-attachments/assets/7a237b1b-b4ee-45b6-b2bc-f2203305530c" />
 
+
+
 - Agora comecamos o RBCD configurando a FAKECOMPUTER para delegar a SPIDERMAN
 <img width="1065" height="663" alt="newblood" src="https://github.com/user-attachments/assets/fc015ecb-d345-4139-a2e4-184fd7cff1ca" />
 - Configuramos amaquina alvo
@@ -58,7 +60,15 @@ RETURN p
 
 ## Exploração desde Windows
 <img width="1487" height="796" alt="blood-RBCD" src="https://github.com/user-attachments/assets/b43148a1-2157-435b-9b90-59effd15b031" />
+Ou para maior facilidade pode usar a ferramenta [RBCD_MANAGER](https://github.com/DarksBlackSk/rbcd_manager/tree/master) de um querido amigo
+
+
 
 ## Proteções contra RBCD
+- Establecer MachineAccountQuota a 0: ``` Set-ADDomain (Get-ADDomain).distinguishedname -Replace @{"ms-ds-MachineAccountQuota"="0"}```
+- Auditar y Restringir Permisos
+- Proteger las Cuentas con Privilegios de Escritura
+
 
 ## Detecção com Wazuh (Regras)
+Voce pode configurr entradas como nas ouras delegacoes se alguem quiser autenticar com ferramentas como psexec, o forjar tickets evento 4769, procura modificacoes no atriburo msDS-AllowedToActOnBehalfOfOtherIdentity, ticket de contas $, quem pidio criar a maquina/conta?
