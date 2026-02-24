@@ -79,6 +79,13 @@ Mesmo para certificates (just check box for it then all next) continuar
 <img width="1329" height="683" alt="grupos" src="https://github.com/user-attachments/assets/faff3c33-33c3-44b7-9b77-3c6a5539519f" />
 
 
+## Habilitar a aba "Security" no ADUC
+Por padrão, a aba "Security" (Segurança) não aparece nas propriedades de usuários no ADUC. Você precisa ativá-la primeiro:
+
+- No HYDRA-DC, abra o Active Directory Users and Computers (dsa.msc).
+- No menu superior, clique em View (Exibir) → Advanced Features (Recursos Avançados).
+- Agora, ao abrir as propriedades de qualquer objeto, a aba Security estará visível.
+
 
 
 
