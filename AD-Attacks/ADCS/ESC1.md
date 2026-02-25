@@ -1,4 +1,17 @@
-## Passo a passo: Configurar o modelo vulnerável (ESC1) no HYDRA-DC
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
+A exploração do certificado AD CS ESC1 é uma vulnerabilidade crítica nos Serviços de Certificados do Active Directory. Neste artigo, exploraremos como modelos de certificados mal configurados podem levar ao aumento de privilégios. Além disso, abordaremos várias técnicas de exploração.
+
+O modelo de certificado AD CS (Serviços de Certificados do Active Directory) é uma configuração predefinida no Microsoft AD CS que define o tipo de certificado que um usuário, computador ou serviço pode solicitar. Ele especifica parâmetros como a finalidade pretendida do certificado, algoritmos de criptografia, período de validade e se ele pode ser registrado automaticamente.
+
+Esses modelos permitem que os administradores controlem a emissão e o gerenciamento de certificados no ambiente do Active Directory de uma organização. O AD CS usa esses modelos para padronizar a emissão de certificados, facilitando a implantação de certificados seguros para usuários, computadores e serviços.
+
+## Configuração
 Vamos criar um novo modelo chamado “ESC1-Vulnerable” para não modificar os que já existem. Faremos isso no seu controlador de domínio, HYDRA-DC.
 - Abra o console de modelos de certificados:
   . No HYDRA-DC, abra o Gerenciador do Servidor.
@@ -18,7 +31,8 @@ Vamos criar um novo modelo chamado “ESC1-Vulnerable” para não modificar os 
 
 Listo!!
 
-## Reconhecimento da vulnerabilidade
+## Ataque
+
 ### Linux
 <img width="1061" height="510" alt="fsdfd" src="https://github.com/user-attachments/assets/64970528-f905-45f9-88d0-a7a29170de4c" />
 <img width="731" height="776" alt="vv" src="https://github.com/user-attachments/assets/53ffa36f-7f90-4c59-8afe-c45d600a6cdd" />
@@ -47,13 +61,13 @@ Domain Users pode se inscrever	✅ TRUE	fcastle (como Domain User) pode solicita
 - ``` .\Rubeus.exe asktgt /user:Administrator /certificate:cert.pfx /getcredentials /show /nowrap```
 
 
-## 🛡️ PREVENÇÕES CONTRA ESC1
+## 🛡️ Prevenção
 
 - Corrigir o Template Vulnerável
 - Configurar GPO para restringir solicitações de certificado
 ```gpupdate /force```
 
-## 🔍 DETECÇÕES COM WAZUH
+## 🔍 Detecção
 1. Detectar Solicitações de Certificado Suspeitas (EventID 4886/4887)
 ```
 <group name="windows,adcs,attack,">
