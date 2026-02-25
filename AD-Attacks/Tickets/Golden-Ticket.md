@@ -1,5 +1,12 @@
-## Descricao
+👉 [Explicação](#explicação)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 O Kerberos Golden Ticket é um ataque no qual agentes maliciosos podem criar/gerar tickets para qualquer usuário no domínio, atuando efetivamente como um controlador de domínio.
+
+> Este ataque fornece meios para uma persistência elevada no domínio. Ocorre depois que um adversário obtém privilégios de administrador de domínio (ou similares)
 
 Imagina que a tua empresa tem um cartão de acesso que funciona para todas as portas. Quem controla a emissão desses cartões é uma entidade central (o Controlador de Domínio).
 No centro deste sistema, existe uma conta de computador especial, chamada krbtgt. Pensa nela como o "carimbo oficial" da empresa. Para um cartão ser válido, tem de ter este carimbo. É a chave-mestre que garante que todos os cartões são legítimos.
@@ -11,9 +18,7 @@ Com este ataque, o criminoso pode:
 - Manter o acesso mesmo que a password do administrador seja mudada, porque ele tem o controlo do carimbo que valida tudo.
 - Resumo simples: É o ataque mais poderoso num domínio do Windows. Quem tem o "carimbo" (hash do krbtgt) tem o poder de criar o seu próprio "passe dourado" para toda a rede.
 
-> Este ataque fornece meios para uma persistência elevada no domínio. Ocorre depois que um adversário obtém privilégios de administrador de domínio (ou similares).
-
-## Attack
+## Ataque
 
 - Pegamos o hash do krbtgt
 ``` mimikatz # lsadump::dcsync /domain:MARVEL.local /user:krbtgt```
@@ -44,7 +49,7 @@ S-1-5-21-2699579203-2312383683-555258765
 
 
 
-## Prevencao
+## Prevenção
 
 - Protege o "Carimbo" (krbtgt): Muda a password da conta krbtgt regularmente (de 6 em 6 meses ou anualmente). Usa o script oficial da Microsoft (KrbtgtKeys.ps1) para o fazer em modo de auditoria primeiro, garantindo que todos os Controladores de Domínio sincronizam sem causar problemas na rede.
 
@@ -53,7 +58,7 @@ S-1-5-21-2699579203-2312383683-555258765
 - Protege os Limites (Filtragem SIDHistory): Ativa a filtragem de SIDHistory entre domínios (pai/filho). Isto impede que um atacante que domine um domínio filho consiga saltar para o domínio pai (o principal), fechando essa porta de escalada de privilégios.
 
 
-## Wazuh log e regras
+## Detecção
 
 <img width="1886" height="169" alt="wa" src="https://github.com/user-attachments/assets/1a73f03b-704f-4580-a876-14d52d1f5b59" />
 
