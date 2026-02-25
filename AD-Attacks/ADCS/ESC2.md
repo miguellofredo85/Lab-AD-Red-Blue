@@ -100,14 +100,16 @@ certipy find -vulnerable -u ckent@MARVEL.local -p 'P@$$w0rd123+' -stdout
 
 
 <img width="1123" height="312" alt="upns" src="https://github.com/user-attachments/assets/4566f286-9c65-4f40-9691-a4a17b8dc19c" />
+
 > upn sao sempre nome-de-usuario@dominio.local
 
 
 <img width="746" height="670" alt="sids" src="https://github.com/user-attachments/assets/063d66a2-7358-4c94-ab05-ecc56e798f1f" />
+
 > sid de usuarios, o admin sempre e 500
 
 
-- Dumpeo de credenciais
+- Salvar o ticket e dumpear credenciais
   <img width="1184" height="278" alt="dump" src="https://github.com/user-attachments/assets/ee07dcc1-a372-47a9-ae9f-f38d02e9b631" />
 
 
