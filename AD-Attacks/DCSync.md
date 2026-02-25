@@ -1,16 +1,22 @@
-## Descricao
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 O DCSync é aquele ataque onde os caras se passam por um Controlador de Domínio e pedem replicação pra um Controlador de Domínio de verdade, tudo pra roubar os hashes de senha do Active Directory. Esse ataque pode ser feito tanto por uma conta de usuário quanto por um computador, desde que eles tenham as permissões certas, que são:
 
 Replicating Directory Changes
 
 Replicating Directory Changes All
 
-## Config
+## Configuração
 - No DC
 Server Manager Dashboard -> Tools -> Users and Computers -> click direito MARVEL.local -> Properties -> Add (coloca o usuario) -> check boxes -> apply
 <img width="1731" height="741" alt="config1posta" src="https://github.com/user-attachments/assets/c34871b7-adca-4958-bbb6-e07a3ec7d163" />
 
-## Attack
+## Ataque
 
 - Desde Windows com mimikatz
 <img width="1015" height="836" alt="attackmimikatz" src="https://github.com/user-attachments/assets/86d4cdb1-23ea-4eab-b66d-0113dd07de4c" />
@@ -23,12 +29,12 @@ Server Manager Dashboard -> Tools -> Users and Computers -> click direito MARVEL
 
 
 
-## Prevencao
+## Prevenção
 - Uncheck replication para usuarios
 - Evitar autenticacao pela red
 - Aplicar [RPC Firewall](https://github.com/zeronetworks/rpcfirewall) para bloquear chamadas por RPC
 
-## Wazuh log e regra
+## Detecção
 <img width="1918" height="280" alt="dashhydrawazuh" src="https://github.com/user-attachments/assets/5b49edd4-6397-4d2e-8f7f-6c7d072f7329" />
 
 
