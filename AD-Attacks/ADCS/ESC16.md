@@ -1,4 +1,11 @@
-## Por que o ESC16 é perigoso
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+
+## Explicação
 - Explora um erro de fortalecimento baseado no registro (DisableExtensionList).
 - Aproveita as permissões no nível de atributo (acesso de gravação ao UPN).
 - Permite persistência furtiva por meio de credenciais ocultas.
@@ -7,7 +14,7 @@
 - O domínio deve ter os Serviços de Certificados do Active Directory e a Autoridade Certificadora configurados.
 
 
-## Configuracao
+## Configuração
 
 <img width="1586" height="562" alt="1" src="https://github.com/user-attachments/assets/89e26dec-eabb-4254-9e5a-719ebe8f0733" />
 
@@ -18,7 +25,9 @@
 <img width="1529" height="533" alt="tstarckgroups" src="https://github.com/user-attachments/assets/b8a70a66-ee89-455f-88cc-2668622ae49e" />
 
 
-## Scan vulnerabilidades de certificados
+## Ataque
+
+Scan vulnerabilidades de certificados
 ```
 ertipy find -vulnerable -u fcastle@MARVEL.local -p 'MYpassword#' -stdout
 Certipy v5.0.4 - by Oliver Lyak (ly4k)
@@ -75,7 +84,6 @@ Certificate Authorities
 ## Recon com bloodhound
 <img width="1846" height="744" alt="pathtodomain" src="https://github.com/user-attachments/assets/f4ed1f61-595d-4300-bd6a-f2080e7204d6" />
 
-## Attack
 - Modificacao do upn
 <img width="1487" height="131" alt="upnchanged" src="https://github.com/user-attachments/assets/c1ed1539-a578-4991-b802-cfc634574835" />
 
@@ -88,9 +96,14 @@ Certificate Authorities
 - Dumpe de hashes
 <img width="1398" height="275" alt="dump" src="https://github.com/user-attachments/assets/6c9a2f1c-9d93-404b-967a-b344900c1016" />
 
+## Prevenção
+Restringir permissões de modelo de certificado → Somente usuários privilegiados devem ter direitos de inscrição.
+Aplicar criptografia forte → Use RSA 3072/4096 bits e SHA-256/SHA-512.
+Desativar atributos SAN definidos pelo usuário → Impedir a falsificação de identidade não autorizada.
+Monitorar a emissão de certificados → Habilite a auditoria para os IDs de evento 4886, 4887, 4768.
+Implementar políticas de revogação de certificados → Use CRLs e OCSP para invalidar certificados roubados.
 
-
-## Wazuh regras
+## Detecção
 
 - Quando você usa certipy auth com um certificado, o Domain Controller gera um Evento 4768 com PreAuthType = 16 (PKINIT). Isso é inevitável — o atacante precisa fazer isso para obter o TGT
 ```
