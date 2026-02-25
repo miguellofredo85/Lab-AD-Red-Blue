@@ -1,10 +1,16 @@
-# GPP passwords
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 
 Quando a Microsoft o lançou com o Windows Server 2008, o Group Policy Preferences (GPP) introduziu a capacidade de armazenar e usar credenciais em vários cenários, todos armazenados pelo AD no diretório de políticas no SYSVOL.
 
 A chave de criptografia que o AD usa para criptografar os arquivos de política XML (a mesma para todos os ambientes do Active Directory) foi divulgada no Microsoft Docs, permitindo que qualquer pessoa descriptografe as credenciais armazenadas nos arquivos de política. Qualquer pessoa pode descriptografar as credenciais porque a pasta SYSVOL (\\DOMAIN\SYSVOL\DOMAIN\Policies) é acessível a todos os “Usuários Autenticados” no domínio, o que inclui usuários e computadores. A Microsoft publicou a chave privada [AES private key on MSDN](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be?redirectedfrom=MSDN).
 
-## Configuracao
+## Configuração
 
 - Encryptador de senha para voce escolher a sua propia
 
@@ -53,7 +59,7 @@ Groups.xml
 ``` PS C:\Users\pparker\Downloads> Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process```
 - Caso seja necesario deshabilitar AV e Defender
 
-  ## Attack
+  ## Ataque
 
 Usaremos a ferramenta [Get-GPPPassword](https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Get-GPPPassword.ps1) (Window) e [gpp-decrypt.py](https://github.com/t0thkr1s/gpp-decrypt/blob/master/gpp-decrypt.py)  (linux)
 <img width="1596" height="802" alt="finalGPP" src="https://github.com/user-attachments/assets/493eafb1-353a-4940-a9df-79f4bbcb9f67" />
