@@ -4,6 +4,7 @@
 
 [Injestor](#injestor)
 
+
 ## Docker
 ### Add Docker's official GPG key:
 sudo apt update
@@ -46,12 +47,18 @@ http://localhost:8080/ui/login (admin:admin)
 docker compose up (dentro da pasta para cada vez que queira usar)
 <img width="1209" height="563" alt="runbloodhound" src="https://github.com/user-attachments/assets/eb7fb4b4-b223-4996-a7b4-de81b1d22c08" />
 
+> se tiver esse problema aqui
+<img width="1504" height="227" alt="pro" src="https://github.com/user-attachments/assets/9b7d154b-de6e-418f-b95c-76894eb4ddbd" />
 
+> instale o seguinte no chrome
+<img width="1413" height="717" alt="chrome" src="https://github.com/user-attachments/assets/cad4d91c-e750-40e7-ba82-aea933ca65ed" />
 
 ## Injestor
 - Netexec
-```nxc ldap IP -u usuario -p senah --bloodhound --collection All --dns-server IP ```
-- No bloodhound gui
+```nxc ldap IP -u usuario -p senah --bloodhound --collection All --dns-server IP ``` (a salida sera um arquivo de data .zip)
+- No bloodhound gui vai no Administrator
+- Upload arquivo.zip e aguarde hasta completar
+<img width="1681" height="779" alt="ggg" src="https://github.com/user-attachments/assets/a3352c81-6015-45e3-a066-d654ae92c23b" />
 
 
 
