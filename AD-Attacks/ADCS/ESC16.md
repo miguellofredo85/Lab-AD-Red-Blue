@@ -72,7 +72,7 @@ Certificate Authorities
       ESC16                             : Other prerequisites may be required for this to be exploitable. See the wiki for more details.
 ```
 
-## Recon com bloodhoun
+## Recon com bloodhound
 <img width="1846" height="744" alt="pathtodomain" src="https://github.com/user-attachments/assets/f4ed1f61-595d-4300-bd6a-f2080e7204d6" />
 
 ## Attack
@@ -90,6 +90,33 @@ Certificate Authorities
 
 
 
+## Wazuh regras
 
+- Quando você usa certipy auth com um certificado, o Domain Controller gera um Evento 4768 com PreAuthType = 16 (PKINIT). Isso é inevitável — o atacante precisa fazer isso para obter o TGT
+```
+<!-- /var/ossec/etc/rules/local_rules.xml -->
+<group name="windows,kerberos,pkinit,">
+  <rule id="100030" level="12">
+    <if_sid>60006</if_sid>
+    <field name="win.system.eventID">4768</field>
+    <field name="win.eventdata.PreAuthType">16</field>
+    <field name="win.eventdata.TargetUserName" type="pcre2">^(?!.*\$$).*$</field> <!-- Exclui contas de computador -->
+    <description>🚨 Autenticação PKINIT (certificado) detectada para $(win.eventdata.TargetUserName)</description>
+    <group>pkinit,critical,certificate_auth,</group>
+  </rule>
+</group>
+```
 
+- Falhas de autenticação PKINIT (tentativas com certificado inválido)
+```
+<group name="windows,kerberos,pkinit,failure,">
+  <rule id="100031" level="8" frequency="5" timeframe="300">
+    <if_matched_sid>60006</if_matched_sid>
+    <field name="win.system.eventID">4771</field>
+    <field name="win.eventdata.PreAuthType">16</field>
+    <description>⚠️ Múltiplas falhas de autenticação PKINIT - Possível tentativa de ataque com certificado</description>
+    <group>pkinit,bruteforce,</group>
+  </rule>
+</group>  
+```
 
