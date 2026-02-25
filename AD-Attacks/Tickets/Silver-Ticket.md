@@ -1,3 +1,10 @@
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 O Silver Ticket é um bilhete de serviço (TGS) forjado que permite acessar um serviço específico (como CIFS, HTTP, LDAP) sem nunca contactar o Domain Controller . Diferente do Golden Ticket (que forja TGTs e dá acesso a tudo), o Silver Ticket é focado e silencioso porque:
 
 Não gera logs no Domain Controller (o DC nem sabe que o ticket foi usado) 
@@ -6,7 +13,7 @@ A validação acontece apenas no servidor de destino
 
 O serviço alvo aceita o ticket porque consegue descriptografá-lo com seu próprio hash
 
-##  🔧 Como funciona o ataque?
+###  🔧 Como funciona o ataque?
 1. AS-REQ: Usuário → KDC (pede TGT)
 2. AS-REP: KDC → Usuário (entrega TGT, criptografado com hash do krbtgt)
 3. TGS-REQ: Usuário → KDC (pede ticket para serviço, apresentando TGT)
@@ -14,7 +21,7 @@ O serviço alvo aceita o ticket porque consegue descriptografá-lo com seu próp
 5. AP-REQ: Usuário → Serviço (apresenta TGS)
 6. Serviço valida o ticket (consegue descriptografar com seu próprio hash)
 
-## 🏗️ Configurando o laboratório para Silver Ticket
+## 🏗️ Configuração
 
 Identificar um serviço com SPN registrado (qualquer serviço com conta associada):
 ```setspn -Q */*```
@@ -26,7 +33,7 @@ Configurar segundo [MSSQL Server Configuracao](https://github.com/miguellofredo8
 
 
 
-### O Ataque Silver Ticket
+## Ataque
 O atacante pula as etapas 1-4 e vai direto para a etapa 5, criando ele mesmo um TGS falso. 
 Para isso precisa:
 ├── 📛 Nome do domínio: ex: "lab.local" 
@@ -80,9 +87,14 @@ Valid starting       Expires              Service principal
 Como temos salvo o ticket no Administrator.ccache nao precisamos colocal a pass para autenticarnos no servicio
 <img width="1467" height="494" alt="auth" src="https://github.com/user-attachments/assets/87da5b07-a90e-4b50-8b0d-d05e9740d7d4" />
 
+## 🛡️ Prevenção
+- Use contas gerenciadas (gMSA) que trocam senhas automaticamente
+- Limite contas com SPNs - só o necessário
+- Mude senhas regularmente (invalida Silver Tickets existentes)
+- Desabilitar RC4 (forçar AES)
+- Contas de serviço não precisam ser Domain Admin
 
-
-# Wazuh log e regras
+## Detecção
 
 Adicionar no ossec.conf do dc
 ```
@@ -123,12 +135,7 @@ Regra
 <img width="1897" height="390" alt="wazuhST" src="https://github.com/user-attachments/assets/12dce797-9d7a-4d82-8ca8-8a48cf30372b" />
 
 
-# 🛡️ Prevenções contra Silver Ticket Attack (Resumo)
-- Use contas gerenciadas (gMSA) que trocam senhas automaticamente
-- Limite contas com SPNs - só o necessário
-- Mude senhas regularmente (invalida Silver Tickets existentes)
-- Desabilitar RC4 (forçar AES)
-- Contas de serviço não precisam ser Domain Admin
+
 
 
 
