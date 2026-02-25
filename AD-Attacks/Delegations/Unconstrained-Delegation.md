@@ -1,4 +1,14 @@
-## Configurando o AD para a Vulnerabilidade (No HYDRA-DC)
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
+O recurso foi lançado inicialmente no Windows Server 2000, mas ainda está presente para compatibilidade com versões anteriores. Basicamente, se um usuário solicitar um ticket de serviço para um serviço em um servidor configurado com delegação irrestrita, esse servidor extrairá o TGT do usuário e o armazenará em cache na memória para uso posterior. Isso significa que o servidor pode se passar por esse usuário em qualquer recurso do domínio.
+
+
+## Configuração
 
 <img width="1634" height="835" alt="ud1" src="https://github.com/user-attachments/assets/d906db72-5d55-4596-8052-aebee6710337" />
 
@@ -8,7 +18,7 @@ O objetivo é fazer um Administrador de Domínio (ou um usuário com altos privi
 - Pré-requisitos no SPIDERMAN (O Computador Vulnerável)
 Comprometer o SPIDERMAN: Você precisa de acesso administrativo (SYSTEM) na máquina SPIDERMAN.
 
-## Attack
+## Ataque
 
 - Primeiro achar delegacoes
 <img width="1038" height="246" alt="finddelegation-linux" src="https://github.com/user-attachments/assets/18cb4d35-72c5-46c3-85fb-4c4e74fbc63a" />
@@ -40,7 +50,7 @@ Comprometer o SPIDERMAN: Você precisa de acesso administrativo (SYSTEM) na máq
   <img width="724" height="502" alt="hash" src="https://github.com/user-attachments/assets/e15e112d-c7a9-4ff8-93a1-955edbb5e0b4" />
 
 
-## 🛡️ Proteções contra Unconstrained Delegation
+## 🛡️ Prevenção
 
 Implementar um firewall RPC de terceiros, como o da Zero Networks, e usá-lo para bloquear funções RPC perigosas. Essa ferramenta também possui um modo de auditoria, permitindo monitorar e obter visibilidade sobre se podem ocorrer interrupções nos negócios ao usá-la ou não. Além disso, ela vai um passo além, fornecendo a funcionalidade de bloquear funções RPC se o OPNUM perigoso associado à coerção estiver presente na solicitação. (Observe que, nessa opção, para cada função RPC recém-descoberta no futuro, teremos que modificar o arquivo de configuração do firewall para incluí-la.)
 Bloqueie controladores de domínio e outros servidores de infraestrutura essenciais de se conectarem às portas de saída 139 e 445, exceto para máquinas necessárias para AD (bem como para operações comerciais). Um exemplo é que, embora bloqueemos o tráfego de saída geral para as portas 139 e 445, ainda devemos permiti-lo para controladores de domínio cruzados; caso contrário, a replicação do domínio falhará. (A vantagem dessa solução é que ela também funcionará contra funções RPC vulneráveis recém-descobertas ou outros métodos de coerção.)
@@ -51,7 +61,7 @@ Requer Kerberos com criptografia forte
 ```Add-ADGroupMember -Identity "Protected Users" -Members "Administrator"```
 
 
-## 🚨 Detecção com Wazuh (Regras)
+## 🚨 Detecção
 <img width="1851" height="640" alt="wazuhspiderman" src="https://github.com/user-attachments/assets/ef58651e-e6f7-47fb-bd63-cce21610a212" />
 
 ```
