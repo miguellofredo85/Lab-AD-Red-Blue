@@ -2,8 +2,6 @@
 
 [Bloodhound](#bloodhound)
 
-
-
 ## Docker
 ### Add Docker's official GPG key:
 sudo apt update
@@ -34,3 +32,17 @@ sudo docker run hello-world
 ```
 
 ## Bloodhound
+> Instalacao
+1. wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
+2. tar -xvzf bloodhound-cli-linux-amd64.tar.gz
+3. ./bloodhound-cli install
+
+> Commando uteis
+./bloodhound-cli resetpwd (se quiser mudar a senha)
+http://localhost:8080/ui/login (admin:admin)
+./bloodhound-cli update
+docker compose up (dentro da pasta para cada vez que queira usar)
+
+
+
+
