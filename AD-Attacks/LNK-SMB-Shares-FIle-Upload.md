@@ -1,7 +1,11 @@
-### Recurso compartilhado para exploracao de subidas de arquivos .lnk o .scf
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
 
-## Descricao
 
+## Explicação
 Imagine que você tem uma pasta no seu computador e, dentro dela, um atalho (arquivo .lnk) que aponta para um programa. Quando você abre essa pasta, o Windows é muito "prestativo": ele já tenta carregar o ícone do programa para mostrar bonitinho na tela.
 O atacante coloca esse arquivo .lnk em algum lugar onde a vítima vai acessar:
 
@@ -13,7 +17,7 @@ Quando a vítima simplesmente abre a pasta onde o arquivo .lnk está (sem nem cl
 O Windows então automaticamente tenta se conectar ao servidor do atacante para baixar o ícone.
 
 
-## Configuracao
+## Configuração
 
 - criar uma pasta Shares no C:\ e fazer click direito
   <img width="1270" height="826" alt="smb1" src="https://github.com/user-attachments/assets/0e48ebd1-8cd9-490c-8b7b-0e4ff22f2581" />
@@ -55,7 +59,7 @@ while ($true) {
     Remove-Item -Path "C:\Shares\*" -Recurse -Force
 }
 
-## Attack
+## Ataque
 
 - Criacao do .lnk
 ```
@@ -79,12 +83,12 @@ PS C:\Users\pparker\Downloads> $lnk.Save()
   <img width="921" height="447" alt="r4" src="https://github.com/user-attachments/assets/cf000a85-898b-42bd-af33-fb0226c8d9d6" />
 
 
-## Prevencao
+## Prevenção
 - Rede: Bloquear SMB na saída | Desabilitar Protocolos Legados LLMNR, NetBIOS-NS e mDNS em toda a rede via Política de Grupo
 - Sistema: Desabilitar Autenticação NTLM
 
 
-## Wazuh log (nao precisamos rule pois ja e detectado por Suricata)
+## Detecção
 <img width="1881" height="471" alt="wazuh-alert-com-suricata" src="https://github.com/user-attachments/assets/f8a083a2-d522-4486-94d0-fe3b1ea2be5a" />
 
 
@@ -95,6 +99,7 @@ PS C:\Users\pparker\Downloads> $lnk.Save()
 
 
   
+
 
 
 
