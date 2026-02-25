@@ -2,6 +2,8 @@
 
 [Bloodhound](#bloodhound)
 
+[Injestor](#injestor)
+
 ## Docker
 ### Add Docker's official GPG key:
 sudo apt update
@@ -42,6 +44,14 @@ sudo docker run hello-world
 http://localhost:8080/ui/login (admin:admin)
 ./bloodhound-cli update
 docker compose up (dentro da pasta para cada vez que queira usar)
+<img width="1209" height="563" alt="runbloodhound" src="https://github.com/user-attachments/assets/eb7fb4b4-b223-4996-a7b4-de81b1d22c08" />
+
+
+
+## Injestor
+- Netexec
+```nxc ldap IP -u usuario -p senah --bloodhound --collection All --dns-server IP ```
+- No bloodhound gui
 
 
 
