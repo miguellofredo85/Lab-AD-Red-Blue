@@ -112,6 +112,10 @@ certipy find -vulnerable -u ckent@MARVEL.local -p 'P@$$w0rd123+' -stdout
 - Salvar o ticket e dumpear credenciais
   <img width="1184" height="278" alt="dump" src="https://github.com/user-attachments/assets/ee07dcc1-a372-47a9-ae9f-f38d02e9b631" />
 
+- Ou usar nxc com o arquivo admin.pfx para dumpear
+  <img width="1855" height="156" alt="nxcPFX" src="https://github.com/user-attachments/assets/7a87a69e-3b85-4223-890d-edee5b8e7246" />
+
+
 
 ## Prevenção
 - Restringir Permissões de Inscrição (Enrollment Rights)
