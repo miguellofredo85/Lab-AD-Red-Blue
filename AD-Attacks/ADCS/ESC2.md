@@ -26,7 +26,7 @@ Esses EKUs permitem que o invasor solicite um certificado e se autentique como u
 1. Abra o Console de Modelos de Certificado:
   - Pressione Win + R, digite certtmpl.msc e pressione Enter. Isso abrirá o gerenciador de modelos de certificado
 2. Click direito sobre "User" -> Duplicar Template
-3. Aba Subject Name -> UPN check e Email name unchek
+3. Aba Subject Name -> UPN check e Email name unchek | Supply in the request checked
 4. Aba Request Handling -> Allow private key to be exported check
 5. Aba Security -> Domain Users enroll  
 6. Aba Extensions:
@@ -95,19 +95,36 @@ certipy find -vulnerable -u ckent@MARVEL.local -p 'P@$$w0rd123+' -stdout
 
 
 ## Ataque
-- Solicitar um certificado como administrador
-```certipy req -u 'ckent@ignite.local' -p 'P@$$w0rd123+' -dc-ip 192.168.0.40  -ca MARVEL-HYDRA-DC-CA -target 'HYDRA-DC.MARVEL.local' -template 'ESC2-User'```
+- Solicitar TGT e salvar como .cache
+  <img width="1853" height="546" alt="ccache" src="https://github.com/user-attachments/assets/24d3d966-64c2-4679-b33d-a0e05c767577" />
 
 
+<img width="1123" height="312" alt="upns" src="https://github.com/user-attachments/assets/4566f286-9c65-4f40-9691-a4a17b8dc19c" />
+> upn sao sempre nome-de-usuario@dominio.local
 
 
-# EM PROGRESSO........................
+<img width="746" height="670" alt="sids" src="https://github.com/user-attachments/assets/063d66a2-7358-4c94-ab05-ecc56e798f1f" />
+> sid de usuarios, o admin sempre e 500
 
 
+- Dumpeo de credenciais
+  <img width="1184" height="278" alt="dump" src="https://github.com/user-attachments/assets/ee07dcc1-a372-47a9-ae9f-f38d02e9b631" />
 
 
 ## Prevenção
-...
+- Restringir Permissões de Inscrição (Enrollment Rights)
+- Restringir Permissões de Controle (Write/Full Control)
+- Configuração Segura de Templates
+- Habilitar a Aprovação do Gerente da CA
 
+ 
 ## Detecção
-> Traditional SIEMs and antivirus solutions may not detect ESC2 unless they’re explicitly configured to monitor for events like Event ID 4887 or unusual certificate enrollments.
+Monitorar Eventos de Solicitação de Certificado (Event ID 4886/4887) : No seu Domain Controller (HYDRA-DC), o Windows registra eventos de solicitação de certificado.
+
+Event ID 4886: Uma nova solicitação de certificado foi recebida pela CA.
+
+Event ID 4887: Uma solicitação de certificado foi emitida (aprovada).
+
+Monitorar a Solicitação em Nome de Outro (Event ID 4888) :
+
+Event ID 4888: Uma solicitação de certificado foi feita em nome de outro sujeito (o coração do ataque ESC2). Este evento é um indicador direto de que um agente de registro está sendo usado.
