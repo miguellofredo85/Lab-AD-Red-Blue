@@ -1,4 +1,10 @@
-## Compreendendo o Ataque ESC8
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
 - Antes de colocarmos a mão no teclado, é crucial entendermos o que vamos fazer. O ataque segue esta lógica :
 - O Alvo: Uma Autoridade Certificadora (CA) com o serviço de "Inscrição Web de Certificados" (CES) ativo e acessível via HTTP (não HTTPS).
 - A Falha: Esse endpoint web aceita autenticação NTLM, um protocolo vulnerável a ataques de "relay" ou "retransmissão" .
@@ -8,6 +14,7 @@
 - O Impacto: Com o certificado do Controlador de Domínio, podemos forjar tickets e efetivamente controlar todo o domínio
 
 
+## Configuração
 - Para o ESC8 funcionar, a CA precisa:
   . Ter o papel de "Certification Authority Web Enrollment" instalado. (Provavelmente já está, pois você teve resultados no certipy).
   . Ter o endpoint HTTP (porta 80) habilitado e acessível. Esta é a misconfiguração chave.Aceitar autenticação NTLM neste endpoint (é o comportamento padrão).
@@ -36,12 +43,12 @@ Na lista de funções, encontre e expanda (não apenas marque) Active Directory 
  - Isso aqui quere dizer que esta funcionando!
 <img width="962" height="268" alt="4" src="https://github.com/user-attachments/assets/5953ae7a-7e4d-493c-b12f-6259fb25f17f" />
 
-
+## Ataque
 ### Recon
 ```certipy find -u 'fcastle@MARVEL.local' -p 'MYpassword#' -dc-ip 192.168.0.40 -vulnerable -stdout | grep -A 10 "Web Enrollment"```
 <img width="676" height="763" alt="5" src="https://github.com/user-attachments/assets/b7b3cb21-dfcb-4cef-a046-ad76512b3c8c" />
 
-### Attack
+
 Primeiro, ele retransmite a autenticação SMB recebida para a interface de inscrição na Web. Em seguida, ele solicita automaticamente um certificado usando o modelo DomainController. Por fim, após o sucesso, ele armazena o certificado e a chave para uso posterior.
 
 - Forçar o DC a autenticar com o nxc
@@ -59,7 +66,7 @@ Esta saída confirma que o relé foi bem-sucedido e que a CA emitiu um certifica
 
 
 
-## Prevencao
+## Prevenção
 Desative o registro na Web se não for necessário ou restrinja o acesso apenas a usuários internos.
 Imponha HTTPS e desative ou restrinja NTLM.
 Use autenticação somente Kerberos e defina LmCompatibilityLevel = 5 para recusar NTLMv1.
@@ -71,7 +78,7 @@ Habilite os logs de auditoria da CA e monitore as inscrições de certificados d
 Habilite a Proteção Estendida para Autenticação (EPA) para proteger /certsrv no IIS.
 
 
-## Detecao
+## Detecção
 Detectar acesso ao endpoint de inscrição web
 
 /etc/suricata/rules/adcs.rules
