@@ -1,4 +1,13 @@
-## 🛠️ Configuração do AD para RBCD (Lab)
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
+A Delegação Restrita Baseada em Recursos (RBCD) é um recurso de segurança do Active Directory (AD) que permite que um objeto de computador especifique quais usuários ou máquinas podem representar contas para acessar seus recursos. Esse método de delegação oferece um controle mais granular em comparação com os métodos de delegação restrita e irrestrita mais antigos. No entanto, os invasores podem explorar uma RBCD mal configurada para obter acesso não autorizado e escalar privilégios dentro de um domínio.
+
+## 🛠️ Configuração
 
 Por que permissão de escrita é necessário?
 é obrigatório para o ataque RBCD porque o atacante precisa modificar o atributo msDS-AllowedToActOnBehalfOfOtherIdentity do computador alvo (SPIDERMAN$). Este atributo é uma lista de controle de acesso que define quais contas podem delegar para aquele computador .
@@ -20,6 +29,9 @@ WriteOwner	|Tomar posse do objeto|
   <img width="1535" height="766" alt="1" src="https://github.com/user-attachments/assets/6eadaa64-1e2a-43d4-8946-3278f0ecbb1f" />
 - Advanced -> fcastle -> Edit -> check Write msDS-AllowedToActOnBehalfOfOtherIdentity -> Aplicar
 <img width="1671" height="794" alt="2" src="https://github.com/user-attachments/assets/232b12e0-bce2-441d-bea7-e024e3b28724" />
+
+
+## Ataque
 
 - Com nxc verificamos se podemos adicionar maquinas, o maq tem que ser diferente de 0. Em este caso podemos adicionar 10.
 ```
@@ -64,11 +76,11 @@ Ou para maior facilidade pode usar a ferramenta [RBCD_MANAGER](https://github.co
 
 
 
-## Proteções contra RBCD
+## Prevenção
 - Establecer MachineAccountQuota a 0: ``` Set-ADDomain (Get-ADDomain).distinguishedname -Replace @{"ms-ds-MachineAccountQuota"="0"}```
 - Auditar y Restringir Permisos
 - Proteger las Cuentas con Privilegios de Escritura
 
 
-## Detecção com Wazuh (Regras)
-Voce pode configurr entradas como nas ouras delegacoes se alguem quiser autenticar com ferramentas como psexec, o forjar tickets evento 4769, procura modificacoes no atriburo msDS-AllowedToActOnBehalfOfOtherIdentity, ticket de contas $, quem pidio criar a maquina/conta?
+## Detecção
+Voce pode configurar entradas como nas ouras delegacoes se alguem quiser autenticar com ferramentas como psexec, o forjar tickets evento 4769, procura modificacoes no atriburo msDS-AllowedToActOnBehalfOfOtherIdentity, ticket de contas $, quem pidio criar a maquina/conta?
