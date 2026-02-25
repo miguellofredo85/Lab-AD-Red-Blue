@@ -13,8 +13,13 @@ A chave de criptografia que o AD usa para criptografar os arquivos de política 
 ## Configuração
 
 - Encryptador de senha para voce escolher a sua propia
+[Encryptador online](https://onecompiler.com/ruby/44dww4wg5)
 
-https://onecompiler.com/ruby/44dww4wg5
+1. **Clic derecho** → **Propiedades** → pestaña **Seguridad**
+2. **Botón "Avanzadas"** → pestaña **Auditoría**
+3. Edit → Read & Execute
+<img width="1715" height="834" alt="w1" src="https://github.com/user-attachments/assets/d191802b-dee6-400f-96a6-e508913dcf2f" />
+
 
 Groups.xml
 ```
@@ -66,15 +71,10 @@ Usaremos a ferramenta [Get-GPPPassword](https://github.com/PowerShellMafia/Power
 
 <img width="1088" height="274" alt="gpplinux" src="https://github.com/user-attachments/assets/70be0d71-6af3-435b-acda-10ce66505caf" />
 
+## Prevenção
+Simplemente tirar o Group.xml ou tirar as permissoes
 
-## Wazuh regra e deteccao
-
-Configuracao no Windows
-
-1. **Clic derecho** → **Propiedades** → pestaña **Seguridad**
-2. **Botón "Avanzadas"** → pestaña **Auditoría**
-3. Edit → Read & Execute
-<img width="1715" height="834" alt="w1" src="https://github.com/user-attachments/assets/d191802b-dee6-400f-96a6-e508913dcf2f" />
+## Detecção
 
 - Uma vez que a auditoria esteja ativada, qualquer acesso ao arquivo gerará um evento com o ID 4663
 - Eliminar o event id do ossec.conf para que cheguem os logs (por default bem assim)
