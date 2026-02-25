@@ -1,8 +1,24 @@
-### 🔍 Ataque PrintBug + NTLMRelayx Explicado
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
 
-Este ataque combina duas técnicas: PrintBug (MS-RPRN) + NTLM Relay para realizar DCSync e comprometer o domínio. Vamos detalhar cada comando:
+## 🔍 Explicação
+Este ataque combina duas técnicas: PrintBug (MS-RPRN) + NTLM Relay para realizar DCSync e comprometer o domínio. 
 
-## 📡 Comando 1: NTLMRelayx (O Servidor Relay)
+## Configuração
+Para que o ataque seja bem-sucedido, a assinatura SMB nos controladores de domínio deve estar desativada.
+1. Abra o Console de Gerenciamento de Política de Grupo (GPMC)
+2. Edite a política dos controladores de domínio (ex: "Default Domain Controllers Policy").
+3. Navegue até: Configuração do Computador > Políticas > Configurações do Windows > Configurações de Segurança > Políticas Locais > Opções de Segurança.
+4. Encontre e desabilite a seguinte política:
+  - Microsoft network server: Digitalamente assinar comunicações (sempre)
+5. Force a atualização da política nos DCs com o comando: gpupdate /force.
+
+
+## Ataque
+Vamos detalhar cada comando:
+### 📡 Comando 1: NTLMRelayx (O Servidor Relay)
 
 ```impacket-ntlmrelayx -t dcsync://172.16.18.4 -smb2support```
 
@@ -49,7 +65,7 @@ Pontos-chave:
 - Contas de máquina frequentemente têm privilégios em Controladores de Domínio (especialmente se for outro DC)
 - DCSync requer Admin do Domínio ou direitos específicos de replicação - contas de máquina de DCs têm isso!
 
-## Prevencao
+## Prevenção
 Definir a chave do registro como 1 a habilita, enquanto 2 a desabilita:
 <img width="1263" height="238" alt="printspo" src="https://github.com/user-attachments/assets/b76e7a84-1c45-4213-9b9c-3f5118ff1a9a" />
 
