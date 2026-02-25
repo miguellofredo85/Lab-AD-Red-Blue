@@ -1,4 +1,10 @@
-# 📚 O que é Timeroasting?
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+# 📚 Explicação
 Timeroasting é uma técnica de ataque que aproveita a implementação da Microsoft do Protocolo de Tempo Simples de Rede (SNTP) autenticado. Os computadores do domínio usam esta versão autenticada do NTP para evitar ataques de suplantação de horário.
 
 - Como funciona?
@@ -43,7 +49,7 @@ Os hashes obtidos podem ser quebrados offline com Hashcat (modo 31300)
                                                     │ hydra-dc$    │
                                                     └─────────────┘
 
-## Configuracao
+## Configuração
 
 Se esse comando funcionar (não der erro de timeout), significa que o NTP está acessível e o ataque é possível tecnicamente
 ```
@@ -63,10 +69,10 @@ Test-NetConnection -ComputerName HYDRA-DC.MARVEL.local -Port 123 -Protocol UDP
 # (isso você faz no HYDRA-DC ou perguntando ao admin)
 Get-Service w32time | Format-List
 ```
- Entender a "vulnerabilidade" que precisamos
+ > Entender a "vulnerabilidade" que precisamos
 O Timeroasting só é útil se existirem contas de computador com senhas fracas no domínio . Como isso acontece?
 
-## 🚀 PASSO A PASSO DO ATAQUE
+## 🚀 Ataque
 
 <img width="1586" height="168" alt="timeroastingNXC" src="https://github.com/user-attachments/assets/870460d4-faa8-434f-a535-90c273748443" />
 
@@ -89,7 +95,7 @@ SMB         192.168.0.191   445    SPIDERMAN        [+] MARVEL.local\SPIDERMAN$:
 ```
 E ai dependendo dos privilegios pode entrar por smb, winrm, rdp ou tentar listar por ACL, delegacoes, etc.
 
-## 🛡️ Proteções contra Timeroasting
+## 🛡️ Prevenção
 1. Identificar computadores com senhas antigas (vulneráveis)
 ```
 $dataLimite = (Get-Date).AddDays(-30)
@@ -116,7 +122,7 @@ Get-WinEvent -LogName System | Where-Object { $_.Id -eq 134 } | Select-Object -F
 ```
 
 
-## 🔍 Detecção com Wazuh
+## 🔍 Detecção
 
 ```
 <group name="windows,ntp,timeroasting,">
