@@ -1,3 +1,14 @@
+👉 [Explicação](#explicação)  
+⚙️ [Configuração](#configuração)  
+⚠️ [Ataque](#ataque)  
+🛡️ [Prevenção](#prevenção)  
+📊 [Detecção](#detecção)
+
+## Explicação
+Um ataque furtivo no Active Directory que explora nomes principais de serviço (SPNs) para extrair e quebrar hashes de tickets TGS, revelando senhas de contas de serviço. Ao contrário do AS-REP Roasting, ele abusa de solicitações Kerberos legítimas. A publicação detalha a configuração do laboratório, a exploração usando Impacket, Rubeus e NXC, e mapeia o ataque para o MITRE ATT&CK T1558.003. Ela também aborda a detecção (ID de evento 4769), a aplicação de AES e as estratégias de mitigação para se defender contra essa ameaça.
+
+
+## Configuração
 - Otorgar SPN no usuario
   <img width="1411" height="427" alt="spn" src="https://github.com/user-attachments/assets/bb740067-0721-406d-98e2-17c9bd92ce41" />
 
@@ -22,9 +33,10 @@ Set-ADUser -Identity "fcastle" -ServicePrincipalNames @{Add='MSSQLSvc/fcastle.ma
 3. Verificar
 Get-ADUser -Identity "fcastle" -Properties ServicePrincipalNames | Select-Object SamAccountName, ServicePrincipalNames
 
-### No Windows
 <img width="1430" height="139" alt="spn-service-onwindows" src="https://github.com/user-attachments/assets/a062547e-9357-4956-a0b4-7326543c6e10" />
 
+
+## Ataque
 Kerberoasting attack from linux
 - como temos as pass de um usuario podemos kerberostear outros usuarios
 <img width="1242" height="447" alt="ker-attack-linux" src="https://github.com/user-attachments/assets/6846b2c8-a8ee-415d-8ec1-6f75d926e6a4" />
@@ -34,11 +46,11 @@ Kerberoasting attack from Windows
 <img width="1055" height="622" alt="ww" src="https://github.com/user-attachments/assets/e2dfd805-fc0c-4faa-82c0-577899cf6692" />
 
 
-## Prevencao
+## Prevenção
 - força da senha da conta de serviço
 - limitar o número de contas com SPNs e desativar aquelas que não são mais utilizadas/necessárias
 
-## Wazuh log e rule
+## Detecção
 ```
 <group name="security_event,windows">
     <!-- KERBEROASTING (T1558.003) -->
