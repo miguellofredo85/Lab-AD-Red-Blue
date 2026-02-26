@@ -1,0 +1,61 @@
+- [Introdução](#introdução)
+- [Configuração](#configuração) 
+- [Ataque](#ataque)
+- [Prevenção](#prevenção)
+- [Detecção](#detecção)
+
+
+
+## Introdução
+Para configurar e explorar a permissão ReadGMSAPassword em seu laboratório, é importante primeiro entender o que é uma gMSA (Group Managed Service Account). Essas contas são especiais porque o Windows gerencia sua senha automaticamente (de 240 caracteres) e a altera a cada 30 dias.
+O ataque se baseia no fato de que a permissão de leitura dessa senha geralmente não é restrita apenas à conta que usa o serviço, mas às vezes é delegada por engano a usuários ou grupos com menos privilégios.
+
+## Configuração
+> Adicionar gupo gMSA
+> No Server Manager -> Tools -> Users and Computers -> Pasta Groups click direito -> New -> Group -> coloca o nome
+<img width="1222" height="531" alt="gmsa_group" src="https://github.com/user-attachments/assets/52c8474c-0a1f-42f7-90b6-d7bc3d986d1f" />
+
+> Adicionar HYDRA-DC$ (computer) e usuario ckent no gmsa_group
+> No Server Manager -> Tools -> Users and Computers -> Pasta do User ou Computers -> procure o usuario ou computador e click direito
+<img width="1677" height="520" alt="add-computer-to-group-gmsa" src="https://github.com/user-attachments/assets/5a54b162-aabb-475c-b04f-99b76833cf6c" />
+<img width="1643" height="541" alt="add-user-to-group-gmsa" src="https://github.com/user-attachments/assets/3f9d5cb7-70ad-466b-9f68-498f8dbd7eb4" />
+
+> Criamos a KDS Root Key no Dominio e fazemos o test com ``` Get-KdsRootKey ``` 
+<img width="818" height="399" alt="kds-root-key" src="https://github.com/user-attachments/assets/2743d129-f81d-40e0-8f1e-e128674bef37" />
+
+> Criamos a conta gMSA e fazemos o test
+- ```New-ADServiceAccount -Name "MyGMSA" -DNSHostName "dc.ignite.local" -PrincipalsAllowedToRetrieveManagedPassword "gmsa_group"```
+- ```Get-ADServiceAccount MyGMSA -Properties PrincipalsAllowedToRetrieveManagedPassword```
+<img width="1229" height="291" alt="test-service-account" src="https://github.com/user-attachments/assets/df3b92c8-8d4f-400b-acd1-a9d2d8efff5e" />
+<img width="1152" height="365" alt="gui-verify-service-account" src="https://github.com/user-attachments/assets/af5a13f1-3d07-474a-b2f1-1517473f856a" />
+
+> Atribuir um SPN:
+> Para permitir a autenticação via Kerberos, atribua um Nome Principal do Serviço (SPN)
+> Este comando registra um Nome Principal do Serviço (SPN) para a conta gMSA MyGMSA no domínio ignite.local. Ele permite que a conta seja autenticada usando Kerberos para o serviço especificado
+```setspn -a MSSQLSvc/HYDRA-DC.MARVEL.local MARVEL.local\MyGMSA```
+<img width="1075" height="609" alt="set-spn" src="https://github.com/user-attachments/assets/dfae79d5-efad-4c9c-9fe6-5006ebb9fa4a" />
+
+> Instalacao de gMSA no HYDRA-DC
+> ```Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0```
+
+> O comando abaixo instala a conta gMSA (MyGMSA) na máquina local, permitindo que ela recupere e use a senha gerenciada. A máquina deve fazer parte do grupo de segurança associado ao gMSA, ou a instalação falhará. Atribuir um SPN:
+> Para permitir a autenticação via Kerberos, atribua um Nome Principal de Serviço (SPN)
+> Este comando registra um Nome Principal do Serviço (SPN) para a conta gMSA MyGMSA no domínio ignite.local. Ele permite que a conta seja autenticada usando Kerberos para o serviço especificado (hackingarticles/ MSEDGEWIN10.ignite.local)
+<img width="1075" height="609" alt="set-spn" src="https://github.com/user-attachments/assets/e2e5af29-21f9-4800-972b-271842381b26" />
+
+> Conta gMSA (MyGMSA) na máquina local, permitindo que ela recupere e use a senha gerenciada. A máquina deve fazer parte do grupo de segurança associado ao gMSA, ou a instalação falhará.
+``` Install-ADServiceAccount -Identity MyGMSA ```
+> Se falhar, incluimos o computado como membro do grupo gmsa, logo limpamos a cache do kerberos do equipo, forcamos atualizacao das policas e instalamos
+<img width="1359" height="498" alt="falha1" src="https://github.com/user-attachments/assets/11d493b4-d319-4570-86f2-8249482a5272" />
+<img width="839" height="368" alt="install" src="https://github.com/user-attachments/assets/1e9132d2-d313-41a3-835f-51f9d5cc9e97" />
+<img width="745" height="48" alt="test" src="https://github.com/user-attachments/assets/81f37937-255e-4a80-9995-4ec88ec81194" />
+
+
+
+## Ataque
+
+
+## Prevenção
+
+
+## Detecção
