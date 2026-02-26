@@ -35,6 +35,16 @@ O ataque se baseia no fato de que a permissão de leitura dessa senha geralmente
 ```setspn -a MSSQLSvc/HYDRA-DC.MARVEL.local MARVEL.local\MyGMSA```
 <img width="1075" height="609" alt="set-spn" src="https://github.com/user-attachments/assets/dfae79d5-efad-4c9c-9fe6-5006ebb9fa4a" />
 
+Parâmetro | 	O que significa |	Explicação no seu contexto|
+|-|-|
+setspn |	Ferramenta de Comando	| Utilitário nativo do Windows para gerenciar os nomes de serviço.|
+-a | 	Add (Adicionar)	| Instrução para adicionar um novo registro de SPN à conta.|
+MSSQLSvc/	| Service Class	Define o tipo de serviço. | MSSQLSvc é o padrão para SQL Server.|
+HYDRA-DC.MARVEL.local	Host/Port	| Onde o serviço está rodando. | Aqui você está dizendo que o serviço SQL está no seu Domain Controller.|
+MARVEL.local\MyGMSA	| Target Account	A conta que "será dona" desse serviço. | É aqui que você vincula o privilégio à conta gMSA.|
+
+
+
 > Instalacao de gMSA no HYDRA-DC
 > ```Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0```
 
