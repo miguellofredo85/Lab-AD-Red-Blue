@@ -39,9 +39,9 @@ O ataque se baseia no fato de que a permissão de leitura dessa senha geralmente
 > ```Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0```
 
 > O comando abaixo instala a conta gMSA (MyGMSA) na máquina local, permitindo que ela recupere e use a senha gerenciada. A máquina deve fazer parte do grupo de segurança associado ao gMSA, ou a instalação falhará. Atribuir um SPN:
-> Para permitir a autenticação via Kerberos, atribua um Nome Principal de Serviço (SPN)
-> Este comando registra um Nome Principal do Serviço (SPN) para a conta gMSA MyGMSA no domínio ignite.local. Ele permite que a conta seja autenticada usando Kerberos para o serviço especificado (hackingarticles/ MSEDGEWIN10.ignite.local)
-<img width="1075" height="609" alt="set-spn" src="https://github.com/user-attachments/assets/e2e5af29-21f9-4800-972b-271842381b26" />
+```Install-ADServiceAccount -Identity "MyGMSA"```
+```Test-ADServiceAccount -Identity "MyGMSA"```
+
 
 > Conta gMSA (MyGMSA) na máquina local, permitindo que ela recupere e use a senha gerenciada. A máquina deve fazer parte do grupo de segurança associado ao gMSA, ou a instalação falhará.
 ``` Install-ADServiceAccount -Identity MyGMSA ```
