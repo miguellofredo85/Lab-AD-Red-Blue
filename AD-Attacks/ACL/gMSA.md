@@ -53,6 +53,14 @@ O ataque se baseia no fato de que a permissão de leitura dessa senha geralmente
 
 
 ## Ataque
+> Reconhecimento com netexect obtemos o .zip para injestar no bloodhound
+<img width="1665" height="134" alt="blood1" src="https://github.com/user-attachments/assets/3f7da5ba-fd19-478f-b2ba-7daad653b249" />
+<img width="1823" height="850" alt="blood2" src="https://github.com/user-attachments/assets/50cd71bd-d531-4509-837f-4446dee0a4a3" />
+
+> Accao
+> Baixamos a ferramenta
+> ```git clone https://github.com/micahvandeusen/gMSADumper.git```
+> ``` pip install -r requirements.txt  --break-system-packages```
 
 
 ## Prevenção
