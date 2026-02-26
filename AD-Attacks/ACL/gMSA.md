@@ -61,9 +61,32 @@ O ataque se baseia no fato de que a permissão de leitura dessa senha geralmente
 > Baixamos a ferramenta
 > ```git clone https://github.com/micahvandeusen/gMSADumper.git```
 > ``` pip install -r requirements.txt  --break-system-packages```
+<img width="981" height="140" alt="hashGMSA" src="https://github.com/user-attachments/assets/f9471ad5-de64-4a4d-87d4-cb9aa551cdfe" />
+
+> Ou com netexec
+<img width="1749" height="118" alt="nxchashgmsa" src="https://github.com/user-attachments/assets/becf3c94-9f96-495d-8b12-645eb0931007" />
+
+> Log on winrm, de aqui para a frente voce pode procurar para fazer pivoting ou outras ACL e etc
+<img width="1099" height="232" alt="winrm" src="https://github.com/user-attachments/assets/76fe2e29-dbdd-40ff-b7a4-24b56035bfbe" />
+
 
 
 ## Prevenção
+- Aplique o princípio do privilégio mínimo: audite e restrinja regularmente as permissões para modificar contas gMSA, garantindo que apenas as entidades necessárias tenham acesso.
+- Monitore o acesso ao gMSA: revise continuamente o atributo msDS-GroupMSAMembership para garantir que apenas contas de computador autorizadas possam recuperar a senha.
+- Habilite alertas em tempo real: configure o monitoramento para detectar e alertar sobre quaisquer alterações nas permissões do gMSA, permitindo uma resposta rápida a possíveis ameaças.
 
 
 ## Detecção
+> Wazuh + Sysmon (Logs de Eventos)
+> O Windows gera o Event ID 4662 quando um objeto do AD é acessado. Precisamos filtrar pelo GUID do atributo da senha da gMSA.
+```
+<group name="windows,active_directory,">
+  <rule id="110010" level="12">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4662$</field>
+    <field name="win.eventdata.properties">3d1a588a-367d-4114-8789-f5383f98018e</field>
+    <description>Alerta: Leitura da senha de uma conta gMSA detectada (Possível escalação lateral)</description>
+  </rule>
+</group>
+```
