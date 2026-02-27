@@ -86,8 +86,14 @@ Por padrão, a aba "Security" (Segurança) não aparece nas propriedades de usu�
 - No menu superior, clique em View (Exibir) → Advanced Features (Recursos Avançados).
 - Agora, ao abrir as propriedades de qualquer objeto, a aba Security estará visível.
 
+## Habilitar Admin local
+> Entrar como MARVEL\administrator no THEPUNISHER (ou a sua maquina que esteja no dominio) -> Local users and groups
+> Setear a senah do admin local
+<img width="1314" height="631" alt="set pass" src="https://github.com/user-attachments/assets/0cecaccb-d395-4934-8cb2-c0f5e2415e01" />
 
 
+> Habilitar o admin local
+<img width="1362" height="654" alt="adminlocal" src="https://github.com/user-attachments/assets/4505457b-7247-434e-b9bd-e42f9186415c" />
 
 
 
