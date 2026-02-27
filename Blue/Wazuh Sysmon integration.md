@@ -51,6 +51,13 @@ Na pasta de instalacao do Wazuh agent  (geralmente c:\Program Filex86\ossec-agen
 </localfile>
 
 <img width="721" height="949" alt="wazuhsys" src="https://github.com/user-attachments/assets/adc3b604-6c75-474d-876e-248b9064c832" />
+```
+<localfile>
+<location>Microsoft-Windows-Sysmon/Operational</location>
+<log_format>eventchannel</log_format>
+</localfile>
+```
+
 
 Reiniciar o servicio Wazuh
 
