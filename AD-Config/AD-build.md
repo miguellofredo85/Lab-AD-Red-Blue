@@ -95,6 +95,9 @@ Por padrão, a aba "Security" (Segurança) não aparece nas propriedades de usu�
 > Habilitar o admin local
 <img width="1362" height="654" alt="adminlocal" src="https://github.com/user-attachments/assets/4505457b-7247-434e-b9bd-e42f9186415c" />
 
+> set MARVEL\fcastle como administrator
+<img width="1589" height="706" alt="addfcastleadminlocal" src="https://github.com/user-attachments/assets/2cad9096-338a-4508-a16b-0a3f28c5cd38" />
+
 
 
 
