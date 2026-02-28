@@ -106,6 +106,11 @@ Get-ADObject -Identity $novoGuid -IncludeDeletedObjects -Properties * |
 ```
 <img width="1617" height="245" alt="muitosguids" src="https://github.com/user-attachments/assets/6258219e-935d-4c22-8b2c-cb7e7c0f9fe3" />
 
+> Ou ainda melhor
+```
+Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects -property objectSid,lastKnownParent
+```
+<img width="1691" height="741" alt="kgndsfjkgnsfjknsf;gkjngf" src="https://github.com/user-attachments/assets/b6e8b316-87c0-4af1-ab76-490a399cdc8f" />
 
 
 > Restore do user
