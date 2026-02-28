@@ -83,6 +83,10 @@ Get-ADObject -Identity $novoGuid -IncludeDeletedObjects -Properties * |
 . ```Get-ADUser fuser_teste -Server HYDRA-DC.MARVEL.local | Format-List Name, SamAccountName, Enabled, DistinguishedName```
 <img width="1697" height="285" alt="restore-user" src="https://github.com/user-attachments/assets/6c369f96-c6b3-47b2-8a91-5d0272d9e565" />
 
+
+> ATENCAO! Se quiser deletar todo da lixaira Deleted Object no ADAC, execute o seguinte comando no powershell do DC
+```Get-ADObject -Filter 'isDeleted -eq $true' -IncludeDeletedObjects | Where-Object { $_.DistinguishedName -ne "CN=Deleted Objects,$((Get-ADRootDSE).defaultNamingContext)" } | Remove-ADObject -Confirm:$false```
+
 ---
 
 ## Ataque
