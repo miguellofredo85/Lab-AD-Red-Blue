@@ -12,3 +12,5 @@
 
 
 ```smbmap -H 10.129.14.128 --upload test.txt "notes\test.txt" ``` (subir arquivo) 
+
+```smclient domain/usuario:senha@dc1/dominio.local -k``` (por kerberos)
