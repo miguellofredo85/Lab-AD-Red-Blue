@@ -331,13 +331,40 @@ eip = pack("<L", 0x5F4A358F)
 ....
 ```
 
-> Verificamos haciendo un breackpoint para ver si realmente cae en el esp :
-seta azul (Go to Address in Dissassembler)-> colocamos o endereco -> ok
+> Verificamos haciendo un breackpoint para ver si realmente cae en el esp, start immunity :
+
+. seta azul (Go to Address in Dissassembler, fica antes da letra l)-> colocamos o endereco -> ok
 si le erra a la direccion volvemos apretar en la flechita azul y ponemos la direccion
 
+. Agora lanca o exploit
 
+. Agora o botao step into (logo do pausa) e verificamos se o EIP tem o mesmo valor que ESP
 
 <img width="1741" height="746" alt="image" src="https://github.com/user-attachments/assets/f7b19758-111e-45f3-bed9-2eaa90cd256a" />
+
+### **Uso de NOPs, deslocamentos na pilha e interpretação do Shellcode para obter RCE**
+
+> Criamos os códigos nop para dar um tempo na interpretação do shellcode
+
+```
+....
+s.send(b"PASS " + payload + eip + b'\x90'*16 + shellcode + b'\r\n')
+.....
+```
+
+### PoC
+
+> Lancamos o exploit e obtemos uma consola como system
+
+
+
+<img width="1810" height="909" alt="image" src="https://github.com/user-attachments/assets/2e9300d0-472a-4d63-94f9-4a19056ebd45" />
+
+
+<img width="750" height="911" alt="image" src="https://github.com/user-attachments/assets/5173f7a7-7d83-47e0-a174-a83f8d00aa94" />
+
+
+<img width="1386" height="793" alt="image" src="https://github.com/user-attachments/assets/c83c9928-2be2-4c1c-94fb-c3394d433a37" />
 
 
 
