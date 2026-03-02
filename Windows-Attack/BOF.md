@@ -140,14 +140,10 @@ remote: Total 107560 (delta 281), reused 198 (delta 197), pack-reused 107204 (fr
 Receiving objects: 100% (107560/107560), 140.92 MiB | 24.44 MiB/s, done.
 Resolving deltas: 100% (60497/60497), done.
 miguel~ cd pwndbg/
-miguel~/pwndbg ls
-CLAUDE.md           Dockerfile           Dockerfile.dnf  flake.nix        LICENSE.md  nix        pwndbginit      scripts       tests          uv.lock
-CREDITS.md          Dockerfile.arch      docs            gdbinit.py       lint.sh     profiling  pyproject.toml  setup-dev.sh  tests.sh
-docker-compose.yml  Dockerfile.base-apt  flake.lock      kernel-tests.sh  mkdocs.yml  pwndbg     README.md       setup.sh      unit-tests.sh
 miguel~/pwndbg ./setup.sh 
 ```
 
-> cracao de 5000 caracteres
+> criacao de 5000 caracteres
 <img width="1919" height="999" alt="image" src="https://github.com/user-attachments/assets/657e7ff3-dc61-4ab9-b748-e7288e549b23" />
 
 
@@ -162,7 +158,7 @@ import sys
 # Variables globales
 ip_address = "192.168.0.140"
 port = 110
-payload = b"aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabt>
+payload = b'aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabt....'
 
 def exploit():
 
