@@ -64,6 +64,13 @@ Mesmo para certificates (just check box for it then all next) continuar
 
 
 - System -> About -> Rename this PC (advancel) -> Change -> Check no Domain e colocar o nome do dominio no meu caso foi MARVEL.local. Reiniciar o computador
+
+- No Access Work or School -> Connect -> Conetar a Dominio -> MARVEL.local
+
+<img width="603" height="763" alt="image" src="https://github.com/user-attachments/assets/85f750b4-a27a-47d5-8d71-4c4df4c53186" />
+<img width="984" height="633" alt="image" src="https://github.com/user-attachments/assets/9b2b3004-9086-44b5-9a1a-bcda7217f749" />
+
+
 - Pode conferir o computador vai aparecer no Server Dashboard -> Tools -> Users and Computer -> Computer
 <img width="1062" height="692" alt="Add-Computer-to-DC" src="https://github.com/user-attachments/assets/ed8da8fe-0e90-4515-93fc-caa94b1638fc" />
 
