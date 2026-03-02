@@ -1,5 +1,5 @@
 ### Ferramentas
-- [Windows 7]( [https://windows-7-home-premium.uptodown.com/windows](https://windows-7-home-premium.uptodown.com/windows))
+- [Maquina Windows 10](https://www.microsoft.com/es-es/software-download/windows10iso)
 - [Immunity Debugger](https://immunityinc.com/products/debugger/)
 - [mona.py](https://raw.githubusercontent.com/corelan/mona/master/mona.py) copiar o script e colocar aqui
 <img width="1001" height="355" alt="image" src="https://github.com/user-attachments/assets/8ccc000a-b7e6-4677-b0bd-17db1a0c065d" />
@@ -365,6 +365,36 @@ s.send(b"PASS " + payload + eip + b'\x90'*16 + shellcode + b'\r\n')
 
 
 <img width="1386" height="793" alt="image" src="https://github.com/user-attachments/assets/c83c9928-2be2-4c1c-94fb-c3394d433a37" />
+
+
+---
+
+
+### Conceitos
+
+1. O Offset (A Precisão)
+O número 4654 não é aleatório.
+O que é: A distância exata entre o início do seu texto e o ponto onde o processador guarda o endereço da próxima instrução que ele deve executar.
+Como achamos: Usando ferramentas como o pattern_create e pattern_offset. Se errar por 1 byte, o programa trava, mas você não ganha o controle.
+
+2.O EIP (O Volante do Carro)
+Você definiu como 0x5F4A358F (invertido no Python como \x8f\x35\x4a\x5f).
+O que é: Extended Instruction Pointer. É o registrador que diz ao processador: "Execute a instrução que está no endereço X".
+O "Pulo do Gato": Ao sobrescrever o EIP com o endereço de um JMP ESP, você sequestra o fluxo do programa. Em vez de ele seguir o caminho normal, ele vai para onde você mandar.
+
+3. O JMP ESP (O Trampolim)
+A instrução \xff\xe4 que o Mona encontrou para você.
+O que é: Uma instrução que diz: "Pule agora para onde o topo da pilha (ESP) aponta".
+Por que não usar o endereço do shellcode direto? Porque o endereço da pilha muda a cada execução (devido ao ASLR ou mudanças no ambiente). O endereço dentro da DLL SLMFC.DLL é estático (não muda), servindo como um GPS confiável que sempre te leva de volta para a sua carga maliciosa.
+
+4. O NOP Sled (O Tapete de Boas-Vindas)
+O que é: No Operation. É uma instrução que não faz nada, apenas passa para a próxima.
+Por que: Às vezes, o "pulo" do JMP ESP cai alguns bytes antes ou depois do início do shellcode devido a pequenas variações na memória. Os NOPs criam uma "pista de pouso" segura. Se o processador cair em qualquer um dos 32 NOPs, ele vai escorregando até bater no início do shellcode.
+
+5. O Shellcode (A Carga Útil)
+O código gerado pelo msfvenom.
+O que é: Instruções em linguagem de máquina (Assembly) que forçam o computador da vítima a abrir uma conexão de volta para o seu IP (Reverse Shell).
+Bad Characters: No seu caso, removemos \x00\x0a\x0b\x0c\x0d porque o protocolo POP3 entende esses bytes como "fim de linha" ou "fim de comando". Se eles estivessem no meio do código, o SLMail cortaria o resto do seu shellcode.
 
 
 
