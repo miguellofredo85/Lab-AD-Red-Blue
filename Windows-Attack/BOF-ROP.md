@@ -82,12 +82,16 @@ A DLL diz: "Eu não fui compilada com suporte a DEP (NX: False)".
 
 <img width="1775" height="318" alt="image" src="https://github.com/user-attachments/assets/c6e962c2-2e12-4ddd-8b46-0cfafad74350" />
 
+- Agora copiamos os byterray e colamos no script para logo executarlo e comprovar o DEP ativado
+- No immunity: `!mona bytearray -cpb "\x00"`
+<img width="1420" height="586" alt="image" src="https://github.com/user-attachments/assets/6212ad47-c671-4e5a-860a-2dcb834a9262" />
+
+
 O Windows responde: "Não me importa, eu vou forçar o DEP em todos os processos de qualquer maneira".
 
 <img width="917" height="396" alt="image" src="https://github.com/user-attachments/assets/1be34fa4-42b8-4573-b85b-ced482b2207f" />
 
 É por isso que, mesmo o Mona dizendo False, o seu exploit de JMP ESP vai dar Access Violation. O ROP serve justamente para "derrotar" essa imposição do sistema operacional.
-
 
 
 
