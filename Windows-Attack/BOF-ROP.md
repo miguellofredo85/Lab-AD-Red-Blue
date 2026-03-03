@@ -93,6 +93,99 @@ O Windows responde: "Não me importa, eu vou forçar o DEP em todos os processos
 
 É por isso que, mesmo o Mona dizendo False, o seu exploit de JMP ESP vai dar Access Violation. O ROP serve justamente para "derrotar" essa imposição do sistema operacional.
 
+---
+
+
+Próximo Passo: Começando a Cadeia (Chain)
+Já que decidimos fazer ROP, precisamos de "peças de lego". A primeira peça que precisamos é o POP EAX; RET.
+
+Sabe por que o POP EAX? Porque quase todas as funções do Windows (como a VirtualProtect que desativa o DEP) usam o registrador EAX para receber endereços ou valores importantes.
+
+<img width="1542" height="887" alt="image" src="https://github.com/user-attachments/assets/c46cd9fd-b0ec-45cd-a77f-4d6fae14b21c" />
+
+O gadget 0x625011f0 : # POP EAX # RETN faz o seguinte:
+
+- POP EAX: Pega o próximo valor que estiver na pilha e joga para dentro do registrador EAX.
+
+- RETN: Pega o próximo valor da pilha e pula para ele (o próximo gadget).
+
+Por que isso é "mágico"?
+Imagine que você quer colocar o valor 0x41414141 no registrador EAX, mas o DEP não deixa você executar MOV EAX, 41414141.
+Você faz isso via ROP montando a pilha assim:
+
+[Endereço do Gadget: 0x625011f0] -> Vai para o EIP.
+
+[Valor Desejado: 0x41414141] -> O POP EAX vai "comer" esse valor.
+
+[Endereço do Próximo Gadget] -> O RETN vai pular para cá.
+
+O Próximo Passo: Montar a Chain para VirtualProtect
+Para derrotar o DEP no Windows, o objetivo padrão é chamar a função VirtualProtect. Ela precisa de 5 argumentos nos registradores:
+
+lpAddress: O endereço onde seu shellcode está (na pilha).
+
+dwSize: O tamanho da região (ex: 0x201).
+
+flNewProtect: O valor 0x40 (que significa PAGE_EXECUTE_READWRITE).
+
+lpfOldProtect: Um endereço de memória onde ele possa escrever.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
